@@ -1,0 +1,34 @@
+<!-- <canvas id="ctx" width="500" height="500" style="border:1px solid #000000;"></canvas> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" src="./client/css/general.css">
+	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="./client/js/maze/generateMaze.js"></script>
+	<script src="./client/js/controller/drawController.js"></script>
+	<script src="./client/js/controller/playerController.js"></script>
+	<script src="./client/js/controller/generalController.js"></script>
+</head>
+
+
+<body>
+	<button onclick="generateMaze()">Generate Maze</button>
+	<button onclick="restartScene()">RESTART</button>
+	<div class="row"> 
+		<button id="player1" class="player-button-class" onclick="createPlayer('blue', 'player1')"> Blue </button>
+		<button id="player2" class="player-button-class" onclick="createPlayer('green', 'player2')"> Green </button>
+		<button id="player3" class="player-button-class" onclick="createPlayer('red', 'player3')"> Red </button>
+		<button id="player4" class="player-button-class" onclick="createPlayer('yellow', 'player4')"> Yellow </button>
+		<button id="player5" class="player-button-class" onclick="createPlayer('orange', 'player5')"> Orange </button>
+		<button id="player6" class="player-button-class" onclick="createPlayer('purple', 'player6')"> Purple </button> 
+	</div>
+	<canvas style="border:1px solid #000000;"></canvas>
+</body>
+
+</html>
+
+
+ 

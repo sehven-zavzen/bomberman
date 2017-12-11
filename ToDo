@@ -1,0 +1,46 @@
+08.12.2017
+----------
+* Playerın maze içindeki hareketlerinin sınırlandırılması - done
+* When a client clicks to a color
+**** Disable chosen color button for other sockets - done
+
+* İlk aşamada bomba (renkli küçük bir şekil) koysun, etrafındaki bloklar yok olsun
+
+* Kodların bitbucketa atılması
+
+Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bomba hakkı verilecek)
+
+
+11.12.2017
+----------
+* Simdilik - restart butonu -> bastığında 
+*** SOCKET_LIST, PLAYER_LIST, BOMB_LIST i temizle - done
+*** Player butonlarını enable et - done
+*** Clear canvas - done
+* PutBomb da playerın bombcountını düşür - Simdilik test amaçlı bir baska butonla default degere geri dondur (O mesela) console.log gözlemle
+* Bombalara properties
+*** patlama süresi - Simdilik sadece yok olsunlar
+*** kime ait olduğu - Patladığında playerın bomb countı artacak
+
+
+
+
+
+
+Sonra yapılacaklar
+* Restart game
+* Player can change color with not chosen colors
+* Remove dced players
+* Dced clients color will be available to other clients
+* Game rooms
+* Chat
+* Loglama
+* Score
+** General Message place
+** Messages in a room
+** Private message
+** Create chat room
+** List and join created rooms
+
+Belki yapılacaklar
+* Rejoin - belki - ip den tutulabilir
