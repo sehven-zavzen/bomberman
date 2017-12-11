@@ -7,7 +7,9 @@ app.get('/',function(req, res) {
 });
 app.use('/client',express.static(__dirname + '/client'));
  
-serv.listen(3000);
+//TODO: Olmazsa aç
+//serv.listen(3000);
+app.set('port', (process.env.PORT || 3000));
 
 require('./client/js/controller/playerController');
 
