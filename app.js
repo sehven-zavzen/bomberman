@@ -8,8 +8,8 @@ app.get('/',function(req, res) {
 app.use('/client',express.static(__dirname + '/client'));
  
 //TODO: Olmazsa aç
-serv.listen(3000);
-app.set('port', (process.env.PORT || 3000));
+serv.listen(process.env.PORT || 3000);
+//app.set('port', (process.env.PORT || 3000));
 
 require('./client/js/controller/playerController');
 
