@@ -24,7 +24,7 @@ Player = function(param) {
 	self.itemList = [];
 	self.color = param.color;
 	self.bombPower = 1;
-	self.bombCount = 1; //How many bombs a player can put
+	self.bombCount = 3; //How many bombs a player can put
 	self.playerButtonId = param.playerButtonId;
 
 	self.maxSpd = 20;
@@ -54,6 +54,14 @@ Player = function(param) {
 	
 	self.setMapPositionY = function(newPosY) {
 		self.mapPositionY = newPosY;
+	}
+
+	self.increaseBombCount = function() {
+		self.bombCount++;
+	}
+
+	self.decreaseBombCount = function() {
+		self.bombCount--;
 	}
 
 	//MAP ICINDE TERS BIR MANTIK VAR - DIKKAT
@@ -123,20 +131,25 @@ Player.onPlayerConnect = function(io, playerObj){
 }
 
 
-Player.putBomb = function(io, playerObj){
+Player.putBomb = function(io, playerObj, idBomb){
+
+	if (playerObj.bombCount == 0) {
+		return null;
+	}
+
 	var mapBombPosX = playerObj.mapPositionX;
 	var mapBombPosY = playerObj.mapPositionY;
 
 	var bombPosX = playerObj.positionX;
 	var bombPosY = playerObj.positionY;
 
-	//positionX: bombPosX, positionY: bombPosY, 
-
-	var bombData = {positionX: bombPosX, positionY: bombPosY, mapPositionX: mapBombPosX, mapPositionY: mapBombPosY};
+	var bombData = {id:idBomb, playerId:playerObj.id, positionX: bombPosX, positionY: bombPosY, mapPositionX: mapBombPosX, mapPositionY: mapBombPosY};
 
 	const bomb = new Bomb(bombData);
 	
 	io.sockets.emit('drawBomb', bomb);
+
+	playerObj.decreaseBombCount();
 
 	return bomb;
 }
@@ -145,6 +158,8 @@ Player.putBomb = function(io, playerObj){
 
 Bomb = function(param) { 
 	var self = this;
+	self.id = param.id;
+	self.playerId = param.playerId;
 	self.power = param.power;
 	self.positionX = param.positionX;
 	self.positionY = param.positionY;
@@ -153,6 +168,19 @@ Bomb = function(param) {
 	self.color = 'pink';
 	self.width = 10;
 	self.height = 10;
+	self.time = 3;
+	self.remove = false;
+
+	self.updateTime = function(io) {
+		self.time -= 0.05;
+		
+		if (self.time < 0) {
+			io.sockets.emit('explodeBomb', self);
+			self.remove = true;
+			return self;
+		}
+		return self;
+	}
 
 	return self;
 }

@@ -55,7 +55,7 @@ socket.on('drawBomb', function(data) {
     }
 });
 
-socket.on('updateBomb',function(bombList) {
+socket.on('updateDrawBomb',function(bombList) {
     if (typeof ctx != 'undefined') {
         for(var i in bombList) {
             ctx.fillStyle = bombList[i].color;
@@ -63,6 +63,12 @@ socket.on('updateBomb',function(bombList) {
         }
     }
 });
+
+socket.on('explodeBomb', function(data) {
+    if (typeof ctx != 'undefined') {
+        ctx.clearRect(data.positionX, data.positionY, 20, 20);
+    }
+}) 
 
 
 

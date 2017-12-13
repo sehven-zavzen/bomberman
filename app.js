@@ -71,11 +71,7 @@ io.sockets.on('connection', function(socket){
 	        player.pressingDown = data.state;
 	    else if(data.inputId === 'bomb') {
 	    	if (data.state) {
-	    		var idBomb = Math.random();
-		    	bomb = Player.putBomb(io, player);
-		    	BOMB_LIST[idBomb] = bomb;
-
-		    	console.log(BOMB_LIST);	
+	    		playerPutBomb(io, player);
 	    	}
 	    }
 	    else if(data.inputId === 'map')
@@ -107,16 +103,32 @@ setInterval(function(){
             positionY: player.positionY
         });    
     }
-    for(var i in SOCKET_LIST){
-        var socket = SOCKET_LIST[i];
+    //for(var i in SOCKET_LIST){
+    //    var socket = SOCKET_LIST[i];
         io.sockets.emit('movePlayers',pack);
-    }
+    //}
     for(var i in BOMB_LIST){
-        io.sockets.emit('updateBomb', BOMB_LIST);
+    	var bomb = BOMB_LIST[i];
+    	updatedBomb = bomb.updateTime(io);
+    	if (updatedBomb.remove) {
+    		PLAYER_LIST[bomb.playerId].increaseBombCount();
+    		delete BOMB_LIST[bomb.id];
+    	}
     }
+
+    io.sockets.emit('updateDrawBomb', BOMB_LIST);
+
 },1000/25);
 
 
+
+function playerPutBomb(io, player) {
+	var idBomb = Math.random();
+	bomb = Player.putBomb(io, player, idBomb);
+	if (bomb != null) {
+		BOMB_LIST[idBomb] = bomb;	
+	}
+};
 
 
 function calculateStartPosition() {

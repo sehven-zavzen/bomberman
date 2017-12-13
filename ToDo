@@ -13,14 +13,17 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 
 11.12.2017
 ----------
-* Simdilik - restart butonu -> bastığında 
+* Simdilik - restart butonu -> bastığında - done
 *** SOCKET_LIST, PLAYER_LIST, BOMB_LIST i temizle - done
 *** Player butonlarını enable et - done
 *** Clear canvas - done
-* PutBomb da playerın bombcountını düşür - Simdilik test amaçlı bir baska butonla default degere geri dondur (O mesela) console.log gözlemle
+
+12.12.2017
+----------
+* PutBomb da playerın bombcountını düşür - done
 * Bombalara properties
-*** patlama süresi - Simdilik sadece yok olsunlar
-*** kime ait olduğu - Patladığında playerın bomb countı artacak
+*** patlama süresi - Simdilik sadece yok olsunlar - done
+*** kime ait olduğu - Patladığında playerın bomb countı artacak - done
 
 
 
