@@ -113,6 +113,10 @@ setInterval(function(){
     	if (updatedBomb.remove) {
     		PLAYER_LIST[bomb.playerId].increaseBombCount();
     		delete BOMB_LIST[bomb.id];
+
+    		for (var i in PLAYER_LIST) {
+				PLAYER_LIST[i].map[bomb.mapPositionY][bomb.mapPositionX] = true;
+			}
     	}
     }
 
@@ -126,7 +130,12 @@ function playerPutBomb(io, player) {
 	var idBomb = Math.random();
 	bomb = Player.putBomb(io, player, idBomb);
 	if (bomb != null) {
-		BOMB_LIST[idBomb] = bomb;	
+		//TODO: tüm playerların maplerini update et -> PLAYER_LIST 
+		BOMB_LIST[idBomb] = bomb;
+
+		for (var i in PLAYER_LIST) {
+			PLAYER_LIST[i].map[bomb.mapPositionY][bomb.mapPositionX] = 'B';
+		}
 	}
 };
 
@@ -236,7 +245,7 @@ init = function(){
 	for(var i=0;i<height*2;i++){
 		map[i] = [];
 		for(var j=0;j<width*2;j++){
-		  map[i][j] = false;
+		  map[i][j] = 'W';
 		}
 	}
 	map[y*2][x*2] = true;
@@ -257,7 +266,7 @@ loop = function(){
 
 	for(var i=0;i<directions.length;i++){
 		if(map[(directions[i][1]+y)*2]!=undefined&&
-		   map[(directions[i][1]+y)*2][(directions[i][0]+x)*2]===false){
+		   map[(directions[i][1]+y)*2][(directions[i][0]+x)*2]==='W'){
 		  	alternatives.push(directions[i]);
 		}
 	}

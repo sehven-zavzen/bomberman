@@ -177,7 +177,6 @@ Bomb = function(param) {
 		if (self.time < 0) {
 			io.sockets.emit('explodeBomb', self);
 			self.remove = true;
-			return self;
 		}
 		return self;
 	}
