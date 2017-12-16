@@ -14,16 +14,17 @@ playerList = {};
 
 Player = function(param) {
 	var self = this;
+	self.playerNo = param.playerNo;
 	self.id = param.id;
 	self.socket = param.socket;
 	self.positionX = param.posCanvas[0];
 	self.positionY = param.posCanvas[1];
 	self.map = param.map;
-	self.mapPositionX = param.posMap[0];
-	self.mapPositionY = param.posMap[1];
+	self.mapPositionX = param.posMap[1];
+	self.mapPositionY = param.posMap[0];
 	self.itemList = [];
 	self.color = param.color;
-	self.bombPower = 1;
+	self.bombPower = 2;
 	self.bombCount = 3; //How many bombs a player can put
 	self.playerButtonId = param.playerButtonId;
 
@@ -74,7 +75,11 @@ Player = function(param) {
         	//console.log(newMapPosX);
         	if (map[self.mapPositionY][newMapPosX] == true) {
         		self.positionX += self.maxSpd;
-            	self.mapPositionX = newMapPosX;
+        		
+        		clearPreviousSquare(map, self);
+
+        		map[self.mapPositionY][newMapPosX] = self.playerNo;
+        		self.mapPositionX = newMapPosX;
             }
         }
         if(self.pressingLeft) {
@@ -82,6 +87,10 @@ Player = function(param) {
         	var newMapPosX = parseInt(self.mapPositionX) - 1;
         	if (newMapPosX >= 0 && map[self.mapPositionY][newMapPosX] == true) {
         		self.positionX -= self.maxSpd;
+        		
+				clearPreviousSquare(map, self);
+
+        		map[self.mapPositionY][newMapPosX] = self.playerNo;
         		self.mapPositionX = newMapPosX;
         	}        	
         }
@@ -90,6 +99,10 @@ Player = function(param) {
         	var newMapPosY = parseInt(self.mapPositionY) - 1;
         	if (newMapPosY >= 0 && map[newMapPosY][self.mapPositionX] == true) {
         		self.positionY -= self.maxSpd;
+
+        		clearPreviousSquare(map, self);
+        		
+        		map[newMapPosY][self.mapPositionX] = self.playerNo;
             	self.mapPositionY = newMapPosY;	
         	}
         }
@@ -98,6 +111,10 @@ Player = function(param) {
         	var newMapPosY = parseInt(self.mapPositionY) + 1;
         	if (map[newMapPosY][self.mapPositionX] == true) {
         		self.positionY += self.maxSpd;
+
+        		clearPreviousSquare(map, self);
+        		
+        		map[newMapPosY][self.mapPositionX] = self.playerNo;
                 self.mapPositionY = newMapPosY;
             }
         }
@@ -121,6 +138,13 @@ Player = function(param) {
     return self;
 };
 
+function clearPreviousSquare(map, player) {
+	if (map[player.mapPositionY][player.mapPositionX] != 'B') {
+		map[player.mapPositionY][player.mapPositionX] = true;	
+	}
+	return map;
+}
+
 
 Player.onPlayerConnect = function(io, playerObj){
 	const player = new Player(playerObj);
@@ -143,7 +167,9 @@ Player.putBomb = function(io, playerObj, idBomb){
 	var bombPosX = playerObj.positionX;
 	var bombPosY = playerObj.positionY;
 
-	var bombData = {id:idBomb, playerId:playerObj.id, positionX: bombPosX, positionY: bombPosY, mapPositionX: mapBombPosX, mapPositionY: mapBombPosY};
+	var bombData = {id:idBomb, playerId:playerObj.id, positionX: bombPosX, positionY: bombPosY, 
+					mapPositionX: mapBombPosX, mapPositionY: mapBombPosY,
+					power: playerObj.bombPower};
 
 	const bomb = new Bomb(bombData);
 	
@@ -175,7 +201,6 @@ Bomb = function(param) {
 		self.time -= 0.05;
 		
 		if (self.time < 0) {
-			io.sockets.emit('explodeBomb', self);
 			self.remove = true;
 		}
 		return self;
@@ -184,9 +209,19 @@ Bomb = function(param) {
 	return self;
 }
 
+Wall = function(param) {
+	var self = this;
+	self.type = 'wall';
+	//TODO: mapPosition ve position gerekiyor, width, height
+	self.mapPositionX = param.mapPositionX;
+	self.mapPositionY = param.mapPositionY;
+	self.positionX = param.mapPositionX * 20;
+	self.positionY = param.mapPositionY * 20;;
 
+	self.specialItem = 'none';
 
-
+	return self;
+}
 
 
 

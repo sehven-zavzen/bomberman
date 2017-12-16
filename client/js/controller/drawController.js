@@ -66,7 +66,12 @@ socket.on('updateDrawBomb',function(bombList) {
 
 socket.on('explodeBomb', function(data) {
     if (typeof ctx != 'undefined') {
-        ctx.clearRect(data.positionX, data.positionY, 20, 20);
+        ctx.clearRect(data.bomb.positionX, data.bomb.positionY, 20, 20);
+
+        for (var i in data.walls) {
+            var wall = data.walls[i];
+            ctx.clearRect(wall.positionX, wall.positionY, 20, 20);
+        }
     }
 }) 
 

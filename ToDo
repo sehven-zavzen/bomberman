@@ -27,18 +27,23 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 
 13.12.2017
 ----------
-* Bomba patladığında bombanın gücüne göre etrafındakilerle etkileşime girmesi gerekiyor
-*** Bomba patlayabilen duvarları patlatırsa
-*** Bomba bombayı patlatırsa
 * map arrayinin icine true-false dısında  
-*** playerın yeri icin "P"
-*** bombanın yeri icin "B"
-*** maze tamamlandıktan sonra patlamayan duvarları belirtmek için "S"
-*** playerın hareket edebileceği kareler  true
+*** playerın yeri icin "P" -> P1, P2, P3 .... - done
+*** bombanın yeri icin "B" - done
+*** playerın hareket edebileceği kareler  true - done
 
+
+14.12.2017
+----------
+* Bomba patladığında bombanın gücüne göre etrafındakilerle etkileşime girmesi gerekiyor
+*** Bomba patlayabilen duvarları patlatırsa - done
+*** Bomba bombayı patlatırsa
+* map arrayinin icine true-false dısında
+*** maze tamamlandıktan sonra patlamayan duvarları belirtmek için "S"
 
 
 Sonra yapılacaklar
+* Sabit değerlere dokunulması gerekiyor - e.g 20 for width, height wall, place
 * Bomba konduktan sonra mapte bombanın yerinin false yap, patladığında o yeri true yap
 * Restart game
 * Player can change color with not chosen colors

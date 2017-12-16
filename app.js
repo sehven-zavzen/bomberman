@@ -43,13 +43,13 @@ io.sockets.on('connection', function(socket){
 		//TODO: send positionX and positionY, random socket id of new player
 		var id = Math.random();
 
-		var arrPosMap = calculateStartPosition();
+		var keys = Object.keys(PLAYER_LIST);
+		var playerNo = keys.length
+
+		var arrPosMap = calculateStartPosition(playerNo);
 		var arrPosCanvas = [arrPosMap[1] * pathWidth, arrPosMap[0] * pathWidth];
 
-		//console.log(arrPosCanvas);
-		//console.log(arrPosMap);
-
-		var playerObjData = {id: id, posCanvas: arrPosCanvas, color: data.color, map: map, posMap: arrPosMap};
+		var playerObjData = {id: id, playerNo: 'P' + playerNo, posCanvas: arrPosCanvas, color: data.color, map: map, posMap: arrPosMap};
 		player = Player.onPlayerConnect(io, playerObjData);
 		
     	SOCKET_LIST[id] = socket;
@@ -111,6 +111,8 @@ setInterval(function(){
     	var bomb = BOMB_LIST[i];
     	updatedBomb = bomb.updateTime(io);
     	if (updatedBomb.remove) {
+    		explodeBomb(bomb);
+
     		PLAYER_LIST[bomb.playerId].increaseBombCount();
     		delete BOMB_LIST[bomb.id];
 
@@ -130,7 +132,7 @@ function playerPutBomb(io, player) {
 	var idBomb = Math.random();
 	bomb = Player.putBomb(io, player, idBomb);
 	if (bomb != null) {
-		//TODO: tüm playerların maplerini update et -> PLAYER_LIST 
+
 		BOMB_LIST[idBomb] = bomb;
 
 		for (var i in PLAYER_LIST) {
@@ -140,22 +142,169 @@ function playerPutBomb(io, player) {
 };
 
 
-function calculateStartPosition() {
-	
-	//TODO LATER: 4 ten fazla player için map i kontrol eden bir for loop gerekiyor
+function explodeBomb(bomb) {
 
-	for (var i = 0; i < checkPositions.length; i++) {
-		var posXY = checkPositions[i];
+	//TODO: bombanın gücüne göre etrafındaki kareler taranıp o karelerde bulunan objelere göre aksiyon alınmalı
+	//TODO: W ise patlat, S ise kalsın, P ise yansın, B ise o bombayı da patlatsın
 
-		var arrPosXY = posXY.split(",");
-		//console.log(map);
+	var tempMap = PLAYER_LIST[bomb.playerId].map;
 
-		//TODO: bozdum - herkes aynı yerden başlıyor
-		if (map[arrPosXY[0]][arrPosXY[1]] == true) {
-			//map[arrPosXY[0]][arrPosXY[1]] = false; - playerın ilk dogdugu yeri false yapıyordu
-			return arrPosXY;
+	var wallArr = findBombAdjacent(bomb, tempMap);
+   
+	for (var i = 0; i < wallArr.length; i++) {
+		var wall = wallArr[i];
+		for (var j in PLAYER_LIST) {
+			PLAYER_LIST[j].map[wall.mapPositionY][wall.mapPositionX] = true;
 		}
 	}
+
+
+	io.sockets.emit('explodeBomb', {bomb: bomb, walls: wallArr});
+}
+
+
+///////////////////////////////////////
+//
+//	MAP ->  [Y]  [X] OLARAK BAKILIYOR
+//
+///////////////////////////////////////
+//TODO: refactor this shit function
+function findBombAdjacent(bomb, tempMap) {
+
+	//TODO: positionX ve positionY gerekiyor patlayan duvarlar için
+	//TODO: simdilik sadece yok edilecek duvarları arraye koy gönder
+	var wallsToDestroyArr = [];
+
+	var power = bomb.power;
+	//var tempPower = power;
+	var bombY = bomb.mapPositionY;
+	var tempBombY = bombY;
+
+	var bombX = bomb.mapPositionX;
+	var tempBombX = bombX;
+	//left
+
+	for (var i = 0; i < power; i++) {
+		var traceX = bombX - i;
+		//console.log(traceX);
+		if (traceX > -1 && tempMap[bombY][traceX] == 'W') {
+			//console.log('asdasdasdasdasd');
+
+			const wall = new Wall({mapPositionY: bombY, mapPositionX: traceX});
+			wallsToDestroyArr.push(wall);
+			break;
+		}
+	}
+
+	//right
+	for (var i = 0; i < power; i++) {
+		var traceX = bombX + i;
+		if (traceX < 39 && tempMap[bombY][traceX] == 'W') {
+			const wall = new Wall({mapPositionY: bombY, mapPositionX: traceX});
+			wallsToDestroyArr.push(wall);
+			break;
+		}
+	}
+
+	
+	//top
+	for (var i = 0; i < power; i++) {
+		var traceY = bombY - i;
+		//console.log(traceX);
+		if (traceY > -1 && tempMap[traceY][bombX] == 'W') {
+			//console.log('asdasdasdasdasd');
+			const wall = new Wall({mapPositionY: traceY, mapPositionX: bombX});
+			wallsToDestroyArr.push(wall);
+			break;
+		}
+	}
+
+	//down
+	for (var i = 0; i < power; i++) {
+		var traceY = bombY + i;
+		console.log(traceX);
+		if (traceY < 19 && tempMap[traceY][bombX] == 'W') {
+			//console.log('asdasdasdasdasd');
+			const wall = new Wall({mapPositionY: traceY, mapPositionX: bombX});
+			wallsToDestroyArr.push(wall);
+			break;
+		}
+	}
+
+	//top-left
+	for (var i = 0; i < power; i++) {
+		var traceY = bombY - i;
+		var traceX = bombX - i;
+		//console.log(traceX);
+		if (traceX > -1 && traceY > -1 && tempMap[traceY][traceX] == 'W') {
+			//console.log('asdasdasdasdasd');
+			const wall = new Wall({mapPositionY: traceY, mapPositionX: traceX});
+			wallsToDestroyArr.push(wall);
+			break;
+		}
+	}
+
+	//top-right
+	for (var i = 0; i < power; i++) {
+		var traceY = bombY - i;
+		var traceX = bombX + i;
+		//console.log(traceX);
+		if (traceX < 39 && traceY > -1 && tempMap[traceY][traceX] == 'W') {
+			//console.log('asdasdasdasdasd');
+			const wall = new Wall({mapPositionY: traceY, mapPositionX: traceX});
+			wallsToDestroyArr.push(wall);
+			break;
+		}
+	}
+
+	//down-left
+	for (var i = 0; i < power; i++) {
+		var traceY = bombY + i;
+		var traceX = bombX - i;
+		//console.log(traceX);
+		if (traceX > -1 && traceY < 19 && tempMap[traceY][traceX] == 'W') {
+			//console.log('asdasdasdasdasd');
+			const wall = new Wall({mapPositionY: traceY, mapPositionX: traceX});
+			wallsToDestroyArr.push(wall);
+			break;
+		}
+	}
+
+	//down-right
+	for (var i = 0; i < power; i++) {
+		var traceY = bombY + i;
+		var traceX = bombX + i;
+		//console.log(traceX);
+		if (traceX < 39 && traceY < 19 && tempMap[traceY][traceX] == 'W') {
+			//console.log('asdasdasdasdasd');
+			const wall = new Wall({mapPositionY: traceY, mapPositionX: traceX});
+			wallsToDestroyArr.push(wall);
+			break;
+		}
+	}
+
+	return wallsToDestroyArr;
+}
+
+
+
+
+function calculateStartPosition(playerNo) {
+	
+	//TODO LATER: 4 ten fazla player için farklı bir yol gerekiyor, ya da ekstra array pos
+
+	//for (var i = 0; i < checkPositions.length; i++) {
+		var posXY = checkPositions[playerNo];
+
+		var arrPosXY = posXY.split(",");
+
+		console.log(arrPosXY);
+		//if (map[arrPosXY[0]][arrPosXY[1]] == true) {
+		//	return arrPosXY;
+		//}
+	//}
+
+	return arrPosXY;
 }
 
 
