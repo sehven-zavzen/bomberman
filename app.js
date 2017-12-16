@@ -190,7 +190,7 @@ function findBombAdjacent(bomb, tempMap) {
 		if (traceX > -1 && tempMap[bombY][traceX] == 'W') {
 			//console.log('asdasdasdasdasd');
 
-			const wall = new Wall({mapPositionY: bombY, mapPositionX: traceX});
+			var wall = new Wall({mapPositionY: bombY, mapPositionX: traceX});
 			wallsToDestroyArr.push(wall);
 			break;
 		}
@@ -200,7 +200,7 @@ function findBombAdjacent(bomb, tempMap) {
 	for (var i = 0; i < power; i++) {
 		var traceX = bombX + i;
 		if (traceX < 39 && tempMap[bombY][traceX] == 'W') {
-			const wall = new Wall({mapPositionY: bombY, mapPositionX: traceX});
+			var wall = new Wall({mapPositionY: bombY, mapPositionX: traceX});
 			wallsToDestroyArr.push(wall);
 			break;
 		}
@@ -213,7 +213,7 @@ function findBombAdjacent(bomb, tempMap) {
 		//console.log(traceX);
 		if (traceY > -1 && tempMap[traceY][bombX] == 'W') {
 			//console.log('asdasdasdasdasd');
-			const wall = new Wall({mapPositionY: traceY, mapPositionX: bombX});
+			var wall = new Wall({mapPositionY: traceY, mapPositionX: bombX});
 			wallsToDestroyArr.push(wall);
 			break;
 		}
@@ -225,7 +225,7 @@ function findBombAdjacent(bomb, tempMap) {
 		console.log(traceX);
 		if (traceY < 19 && tempMap[traceY][bombX] == 'W') {
 			//console.log('asdasdasdasdasd');
-			const wall = new Wall({mapPositionY: traceY, mapPositionX: bombX});
+			var wall = new Wall({mapPositionY: traceY, mapPositionX: bombX});
 			wallsToDestroyArr.push(wall);
 			break;
 		}
@@ -238,7 +238,7 @@ function findBombAdjacent(bomb, tempMap) {
 		//console.log(traceX);
 		if (traceX > -1 && traceY > -1 && tempMap[traceY][traceX] == 'W') {
 			//console.log('asdasdasdasdasd');
-			const wall = new Wall({mapPositionY: traceY, mapPositionX: traceX});
+			var wall = new Wall({mapPositionY: traceY, mapPositionX: traceX});
 			wallsToDestroyArr.push(wall);
 			break;
 		}
@@ -251,7 +251,7 @@ function findBombAdjacent(bomb, tempMap) {
 		//console.log(traceX);
 		if (traceX < 39 && traceY > -1 && tempMap[traceY][traceX] == 'W') {
 			//console.log('asdasdasdasdasd');
-			const wall = new Wall({mapPositionY: traceY, mapPositionX: traceX});
+			var wall = new Wall({mapPositionY: traceY, mapPositionX: traceX});
 			wallsToDestroyArr.push(wall);
 			break;
 		}
@@ -264,7 +264,7 @@ function findBombAdjacent(bomb, tempMap) {
 		//console.log(traceX);
 		if (traceX > -1 && traceY < 19 && tempMap[traceY][traceX] == 'W') {
 			//console.log('asdasdasdasdasd');
-			const wall = new Wall({mapPositionY: traceY, mapPositionX: traceX});
+			var wall = new Wall({mapPositionY: traceY, mapPositionX: traceX});
 			wallsToDestroyArr.push(wall);
 			break;
 		}
@@ -277,7 +277,7 @@ function findBombAdjacent(bomb, tempMap) {
 		//console.log(traceX);
 		if (traceX < 39 && traceY < 19 && tempMap[traceY][traceX] == 'W') {
 			//console.log('asdasdasdasdasd');
-			const wall = new Wall({mapPositionY: traceY, mapPositionX: traceX});
+			var wall = new Wall({mapPositionY: traceY, mapPositionX: traceX});
 			wallsToDestroyArr.push(wall);
 			break;
 		}

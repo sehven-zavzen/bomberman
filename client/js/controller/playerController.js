@@ -147,7 +147,7 @@ function clearPreviousSquare(map, player) {
 
 
 Player.onPlayerConnect = function(io, playerObj){
-	const player = new Player(playerObj);
+	var player = new Player(playerObj);
 	
 	io.sockets.emit('drawPlayer', player);
 
@@ -171,7 +171,7 @@ Player.putBomb = function(io, playerObj, idBomb){
 					mapPositionX: mapBombPosX, mapPositionY: mapBombPosY,
 					power: playerObj.bombPower};
 
-	const bomb = new Bomb(bombData);
+	var bomb = new Bomb(bombData);
 	
 	io.sockets.emit('drawBomb', bomb);
 
