@@ -24,7 +24,7 @@ Player = function(param) {
 	self.mapPositionY = param.posMap[0];
 	self.itemList = [];
 	self.color = param.color;
-	self.bombPower = 2;
+	self.bombPower = 3;
 	self.bombCount = 3; //How many bombs a player can put
 	self.playerButtonId = param.playerButtonId;
 

@@ -185,9 +185,10 @@ function findBombAdjacent(bomb, tempMap) {
 	var tempBombX = bombX;
 	//left
 
-	for (var i = 0; i < power; i++) {
-		var traceX = bombX - i;
-		//console.log(traceX);
+	for (var i = 1; i < power; i++) {
+		var traceX = parseInt(bombX) - i;
+		console.log(traceX);
+		console.log(bombY);
 		if (traceX > -1 && tempMap[bombY][traceX] == 'W') {
 			//console.log('asdasdasdasdasd');
 
@@ -198,8 +199,8 @@ function findBombAdjacent(bomb, tempMap) {
 	}
 
 	//right
-	for (var i = 0; i < power; i++) {
-		var traceX = bombX + i;
+	for (var i = 1; i < power; i++) {
+		var traceX = parseInt(bombX) + i;
 		if (traceX < 39 && tempMap[bombY][traceX] == 'W') {
 			var wall = new Wall({mapPositionY: bombY, mapPositionX: traceX});
 			wallsToDestroyArr.push(wall);
@@ -209,8 +210,8 @@ function findBombAdjacent(bomb, tempMap) {
 
 	
 	//top
-	for (var i = 0; i < power; i++) {
-		var traceY = bombY - i;
+	for (var i = 1; i < power; i++) {
+		var traceY = parseInt(bombY) - i;
 		//console.log(traceX);
 		if (traceY > -1 && tempMap[traceY][bombX] == 'W') {
 			//console.log('asdasdasdasdasd');
@@ -221,9 +222,10 @@ function findBombAdjacent(bomb, tempMap) {
 	}
 
 	//down
-	for (var i = 0; i < power; i++) {
-		var traceY = bombY + i;
-		console.log(traceX);
+	for (var i = 1; i < power; i++) {
+		var traceY = parseInt(bombY) + i;
+		console.log('buu Y -> ' + traceY);
+		console.log('buu X -> ' + bombX);
 		if (traceY < 19 && tempMap[traceY][bombX] == 'W') {
 			//console.log('asdasdasdasdasd');
 			var wall = new Wall({mapPositionY: traceY, mapPositionX: bombX});
@@ -233,9 +235,9 @@ function findBombAdjacent(bomb, tempMap) {
 	}
 
 	//top-left
-	for (var i = 0; i < power; i++) {
-		var traceY = bombY - i;
-		var traceX = bombX - i;
+	for (var i = 1; i < power; i++) {
+		var traceY = parseInt(bombY) - i;
+		var traceX = parseInt(bombX) - i;
 		//console.log(traceX);
 		if (traceX > -1 && traceY > -1 && tempMap[traceY][traceX] == 'W') {
 			//console.log('asdasdasdasdasd');
@@ -246,9 +248,9 @@ function findBombAdjacent(bomb, tempMap) {
 	}
 
 	//top-right
-	for (var i = 0; i < power; i++) {
-		var traceY = bombY - i;
-		var traceX = bombX + i;
+	for (var i = 1; i < power; i++) {
+		var traceY = parseInt(bombY) - i;
+		var traceX = parseInt(bombX) + i;
 		//console.log(traceX);
 		if (traceX < 39 && traceY > -1 && tempMap[traceY][traceX] == 'W') {
 			//console.log('asdasdasdasdasd');
@@ -259,9 +261,9 @@ function findBombAdjacent(bomb, tempMap) {
 	}
 
 	//down-left
-	for (var i = 0; i < power; i++) {
-		var traceY = bombY + i;
-		var traceX = bombX - i;
+	for (var i = 1; i < power; i++) {
+		var traceY = parseInt(bombY) + i;
+		var traceX = parseInt(bombX) - i;
 		//console.log(traceX);
 		if (traceX > -1 && traceY < 19 && tempMap[traceY][traceX] == 'W') {
 			//console.log('asdasdasdasdasd');
@@ -272,9 +274,9 @@ function findBombAdjacent(bomb, tempMap) {
 	}
 
 	//down-right
-	for (var i = 0; i < power; i++) {
-		var traceY = bombY + i;
-		var traceX = bombX + i;
+	for (var i = 1; i < power; i++) {
+		var traceY = parseInt(bombY) + i;
+		var traceX = parseInt(bombX) + i;
 		//console.log(traceX);
 		if (traceX < 39 && traceY < 19 && tempMap[traceY][traceX] == 'W') {
 			//console.log('asdasdasdasdasd');
