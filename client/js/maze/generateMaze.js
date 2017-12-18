@@ -47,3 +47,19 @@ socket.on('loopMazeGeneratePartTwo', function (data) {
 socket.on('loopMazeGeneratePartThree', function (data) {	
 	ctx.stroke();
 });
+
+socket.on('addStonesToMaze', function(data) {
+    ctx.fillStyle = data.color;
+    var mp = data.map;
+    console.log(mp);
+    
+    for (var i = 0; i < 20; i++) {
+		for (var j = 0; j < 40; j++) {
+			if (mp[i][j] == 'S') {
+				ctx.clearRect(j * 20, i * 20, 20, 20);
+				ctx.fillRect(j * 20, i * 20, 20, 20);
+			}
+		}
+	}
+});
+

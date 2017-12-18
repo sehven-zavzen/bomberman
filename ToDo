@@ -41,6 +41,9 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 * map arrayinin icine true-false dısında
 *** maze tamamlandıktan sonra patlamayan duvarları belirtmek için "S"
 
+17.12.2017
+----------
+* Add "S" -> stone to maze
 
 Sonra yapılacaklar
 * Sabit değerlere dokunulması gerekiyor - e.g 20 for width, height wall, place

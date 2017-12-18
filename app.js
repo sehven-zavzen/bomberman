@@ -34,6 +34,7 @@ io.sockets.on('connection', function(socket){
 	socket.on('generateMaze', function () {
 		init();
 		loop();
+		
 	});
 
 	var player = null;
@@ -357,7 +358,7 @@ delay = 1            //Delay between algorithm cycles
 x = width/2|0        //Horisontal starting position
 y = height/2|0       //Vertical starting position
 
-wallColor = 'black'   //Color of the walls
+wallColor = 'brown'   //Color of the walls
 pathColor = 'white'//Color of the path
 
 map = []; //TODO: CHECK THIS: Could create problems
@@ -367,7 +368,7 @@ mapHeightMax = (height - 1) * 2;
 
 var checkPositions = ['0,0',  mapHeightMax + ',0',  '0,' + mapWidthMax, mapHeightMax + ',' + mapWidthMax];
 
-randomGen = function(){
+randomGen = function () {
 	seed = Math.random()*100000|0; //Seed for random numbers
 	if(seed===undefined)var seed=performance.now()
 	return function(){
@@ -376,7 +377,7 @@ randomGen = function(){
 	}
 }
 
-init = function(){
+init = function () {
 	offset = pathWidth/2+outerWall;
 	map = [];
 
@@ -407,7 +408,7 @@ init = function(){
 	io.sockets.emit('initMazeGeneratePartThree', canvasObj);
 }
  
-loop = function(){
+loop = function () {
 	x = route[route.length-1][0]|0;
 	y = route[route.length-1][1]|0;
 
@@ -430,7 +431,18 @@ loop = function(){
 			io.sockets.emit('loopMazeGeneratePartOne', canvasObj);
 
 			timer = setTimeout(loop,delay);
+		} else {
+			console.log('stoneees');
+			addStonesToMaze();	
 		}
+
+		
+		/*else {
+			
+			//TODO: add stones to maze
+			addStonesToMaze();	
+		}*/
+		
 		return;
 	}
 
@@ -448,6 +460,21 @@ loop = function(){
 	io.sockets.emit('loopMazeGeneratePartThree');
 	
 	timer = setTimeout(loop,delay);
+}
+
+function addStonesToMaze() {
+	 console.log('qweqweqwe');
+	for (var i = 2; i < 38; i++) {
+		for (var j = 0; j < 19; j++) {
+			if (map[j][i] == 'W') {
+				map[j][i] = 'S';
+				j++;
+			}
+		}
+		i++;
+	}
+
+	io.sockets.emit('addStonesToMaze', {map: map, color: 'black'});
 }
 
 /*
