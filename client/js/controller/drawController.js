@@ -5,7 +5,7 @@
 socket = io();
 
 socket.on('clearScene', function(data) {
-    canvas = document.querySelector('canvas');
+    canvas = document.querySelector('#gameArea');
     ctx = canvas.getContext('2d');
 
     //Clear canvas
@@ -19,7 +19,7 @@ socket.on('clearScene', function(data) {
 });
 
 socket.on('drawPlayer', function(data) {
-    canvas = document.querySelector('canvas');
+    canvas = document.querySelector('#gameArea');
     ctx = canvas.getContext('2d');
 
 	ctx.fillStyle = data.color;
@@ -50,6 +50,11 @@ socket.on('movePlayers',function(data) {
 socket.on('drawBomb', function(data) {
     if (typeof ctx != 'undefined') {
         console.log("Bomb put");
+
+        //TODO: bombayı burda çizdir
+
+        
+
         ctx.fillStyle = data.color;
         ctx.fillRect(data.positionX + (data.width / 2), data.positionY + (data.height / 2), data.width, data.height);
     }
@@ -73,11 +78,9 @@ socket.on('explodeBomb', function(data) {
             ctx.clearRect(wall.positionX, wall.positionY, 20, 20);
         }
     }
-}) 
+})
 
-
-
- document.onkeydown = function(event){
+document.onkeydown = function(event){
     if(event.keyCode === 68)    //d
         socket.emit('keyPress',{inputId:'right',state:true});
     else if(event.keyCode === 83)   //s

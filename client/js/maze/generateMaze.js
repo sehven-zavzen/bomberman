@@ -16,7 +16,7 @@ function generateMaze() {
 };
 
 socket.on('initMazeGeneratePartOne', function (data) {	
-	canvas = document.querySelector('canvas');
+	canvas = document.querySelector('#gameArea');
 	ctx = canvas.getContext('2d');
 	canvas.width = data.width;
 	canvas.height = data.height;

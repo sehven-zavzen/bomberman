@@ -31,6 +31,7 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 *** playerın yeri icin "P" -> P1, P2, P3 .... - done
 *** bombanın yeri icin "B" - done
 *** playerın hareket edebileceği kareler  true - done
+* Bomba konduktan sonra mapte bombanın yerinin false yap, patladığında o yeri true yap
 
 
 14.12.2017
@@ -43,11 +44,17 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 
 17.12.2017
 ----------
-* Add "S" -> stone to maze
+* Add "S" -> stone to maze - can't be exploded
+
+19.12.2017
+----------
+* Bomb animation - try generic
+
+
 
 Sonra yapılacaklar
-* Sabit değerlere dokunulması gerekiyor - e.g 20 for width, height wall, place
-* Bomba konduktan sonra mapte bombanın yerinin false yap, patladığında o yeri true yap
+* 'Refactor' -> Canvas hesaplamaları obje içerisinde yapılabilir
+* 'Refactor' -> Sabit değerlere dokunulması gerekiyor - e.g 20 for width, height wall, place
 * Restart game
 * Player can change color with not chosen colors
 * Remove dced players
