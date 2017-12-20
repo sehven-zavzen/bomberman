@@ -81,7 +81,7 @@ function sprite (options) {
 	that.render = function () {
 
 	// Clear the canvas
-	  that.context.clearRect(that.positionX, that.positionY, that.width, that.height);
+	  that.context.clearRect(that.positionX, that.positionY, that.width / numberOfFrames, that.height);
 	
 	// Draw the animation
 	  that.context.drawImage(

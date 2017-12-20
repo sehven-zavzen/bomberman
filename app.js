@@ -123,7 +123,7 @@ setInterval(function(){
     	}
     }
 
-    io.sockets.emit('updateDrawBomb', BOMB_LIST);
+   //io.sockets.emit('updateDrawBomb', BOMB_LIST);
 
 },1000/25);
 

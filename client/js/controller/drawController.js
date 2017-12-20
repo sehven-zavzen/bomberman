@@ -53,10 +53,10 @@ socket.on('drawBomb', function(data) {
 
         //TODO: bombayı burda çizdir
 
-        
+        denekAnim(data.positionX, data.positionY);
 
-        ctx.fillStyle = data.color;
-        ctx.fillRect(data.positionX + (data.width / 2), data.positionY + (data.height / 2), data.width, data.height);
+        /*ctx.fillStyle = data.color;
+        ctx.fillRect(data.positionX + (data.width / 2), data.positionY + (data.height / 2), data.width, data.height);*/
     }
 });
 
