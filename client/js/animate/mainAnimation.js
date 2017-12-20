@@ -4,15 +4,16 @@
 function createAnimation(options) {
 
 	function animLoop () {
-		
+		var lastframe = null;		
 		//TODO: obj.repeatedTime - obj.repeatTime  bu şekilde alabiliniyor mu bak
-		if () {
-			window.requestAnimationFrame(animLoop);
+		if (obj.repeatTime == 'forever' || obj.repeatedTime < obj.repeatTime) {
+			lastframe = window.requestAnimationFrame(animLoop);
 
 			obj.update();
 			obj.render();	
 		} else {
-			window.cancelAnimation
+			window.cancelAnimationFrame(lastframe);
+			obj.context.clearRect(obj.positionX, obj.positionY, 20, 20);
 		}
 		
 	}
@@ -70,6 +71,9 @@ function sprite (options) {
                 frameIndex += 1;
             } else {
                 frameIndex = 0;
+                if (that.repeatTime != 'forever') {
+					that.repeatedTime++;
+				}
             }
         }
     };
