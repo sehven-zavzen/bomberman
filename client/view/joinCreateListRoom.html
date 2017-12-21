@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="./client/css/general.css">
+	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script src="./client/js/animate/mainAnimation.js"></script>
+
+	<script src="./client/js/controller/generalController.js"></script>
+	<script src="./client/js/controller/joinCreateListRoomController.js"></script>
+
+
+</head>
+
+
+<body class="CJLBackground">
+	
+	<div class="CJLAllContainer">
+		<div class="CJLTopButtonsContainer">
+			<button onclick="createGame()" class="CJLTopButton">Create Game</button>
+			<button onclick="" class="CJLTopButton">Join Game</button>	
+		</div>
+		
+		<label class="CJLLabel"> Game List </label>
+		<div class="CJLGameListContainer">
+			<table id="gameList" class="CJLTable">
+			  <tr>
+			    <td class="CJLTableHeaderCell" style="width: 280px"> Creator </td> <!-- Player Icon + Player Name -->
+			    <td class="CJLTableHeaderCell" style="width: 380px"> Room Name </td>
+			    <td class="CJLTableHeaderCell"> In Room </td>
+			  </tr>
+			</table>
+		</div>
+
+		<label class="CJLLabel"> General Chat Room </label>
+		<div class="CJLGeneralChatRoom">
+			<div class="CJLChatLeftPart">
+				<textarea class="CJLChatMessageTextArea" readonly></textarea>
+				<textarea id="chat-input" class="CJLChatMessageInputArea"></textarea>
+			</div>
+			<div class="CJLChatRightPart">
+				<ul style="list-style-type:none; margin-top: 5px; padding-left: 12px;">
+				  <li>Coffee</li>
+				  <li>Tea</li>
+				  <li>Milk</li>
+				</ul>
+
+				<!-- <textarea class="CJLChatUserTextArea" readonly></textarea> -->
+			</div>
+		</div>
+
+	</div>
+
+
+</body>
+
+</html>

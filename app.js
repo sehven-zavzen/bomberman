@@ -5,6 +5,19 @@ var serv = require('http').Server(app);
 app.get('/',function(req, res) {
     res.sendFile(__dirname + '/client/index.html');
 });
+
+app.get("/play", function(req, res) {
+    res.sendFile(__dirname + '/client/view/play.html');
+});
+
+app.get("/joinCreateListRoom", function(req, res) {
+    res.sendFile(__dirname + '/client/view/joinCreateListRoom.html');
+});
+
+app.get("/gameRoom", function(req, res) {
+    res.sendFile(__dirname + '/client/view/gameRoom.html');
+});
+
 app.use('/client',express.static(__dirname + '/client'));
  
 //TODO: Olmazsa aç
@@ -15,16 +28,40 @@ require('./client/js/controller/playerController');
 
 console.log('Server started!');
  
-var SOCKET_LIST = {};
+var SOCKET_LIST = {}; //keeps everyone who is joined by entering username
 var PLAYER_LIST = {}; //TODO: refactor - baska dosyalara al
 var BOMB_LIST = {}; //TODO: refactor - baska dosyalara al
- 
+var GENERAL_ROOM_NAME = 'general_room'; //TODO: refactor - constant baska dosyalara al - require yapılabilir constant dosyası
+
+
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
 
+	socket.on('enterAsAUser', function(user) {
+		var id = Math.random();
+		socket.id = id;
+		socket._username = user.username;
+		socket._userIcon = user.userIcon;
+		SOCKET_LIST[id] = socket;
+
+		socket.join(GENERAL_ROOM_NAME); //Enter to general_room
+
+	});
+
+	socket.on('requestToGetGeneralRoomUserList', function() {
+		var userList = {};
+		for (var i in SOCKET_LIST) {
+			var userId = SOCKET_LIST[i].id;
+			var user = {userId: userId, userIcon: SOCKET_LIST[i]._userIcon, username: SOCKET_LIST[i]._username};
+			userList[userId] = user;
+		}
+
+		io.sockets.emit('refreshGeneralRoomUserList', userList);
+	});
+
 	socket.on('restartScene', function() {
 
-		SOCKET_LIST = {};
+		/*SOCKET_LIST = {};*/
 		PLAYER_LIST = {};
 		BOMB_LIST = {};
 
@@ -53,7 +90,7 @@ io.sockets.on('connection', function(socket){
 		var playerObjData = {id: id, playerNo: 'P' + playerNo, posCanvas: arrPosCanvas, color: data.color, map: map, posMap: arrPosMap};
 		player = Player.onPlayerConnect(io, playerObjData);
 		
-    	SOCKET_LIST[id] = socket;
+    	/*SOCKET_LIST[id] = socket;*/
 		PLAYER_LIST[id] = player;
 
 		//disable chosen player button for other clients
@@ -81,7 +118,7 @@ io.sockets.on('connection', function(socket){
 
     socket.on('disconnect',function(){
     	if (player) {
-			delete SOCKET_LIST[player.id];
+			/*delete SOCKET_LIST[player.id];*/
 	        delete PLAYER_LIST[player.id];
     	}
     });

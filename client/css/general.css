@@ -1,6 +1,181 @@
-.div-center {
+.divCenter {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	vertical-align: middle;
+}
+
+/*
+	Create - Join - List Room -> CJL Room
+	
+*/
+.CJLBackground {
+	background-color: #f9f2d4;
+}
+
+.CJLAllContainer {
+	display: block;
+	border: 3px solid #4f4e49;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+	padding: 10px;
+	width: 800px;
+	height: 700px;
+}
+
+.CJLTopButtons {
+	display: block;
+	border: 2px solid #4f4e49;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+}
+
+.CJLTopButtonsContainer {
+	display: block;
+	border: 2px solid #4f4e49;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+	vertical-align: middle;
+}
+
+.CJLTopButton {
+	display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 140%;
+    font-weight: bold;
+    width: 388px;
+    margin: 4px;
+}
+
+.CJLTopButton:hover {
+    opacity: 0.7;
+}
+
+.CJLGameListContainer {
+	display: block;
+	background-color: #f7fcf8;
+	border: 2px solid #4f4e49;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+	height: 300px;
+}
+
+.CJLLabel {
+	font-size: 140%;
+	font-weight: bold;
+	color: #b7382a;
+}
+
+.CJLGameList {
+	background-color: #f7fcf8;
+	margin: 5px;
+	width: 98%;
+	height: 95%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	resize: none;
+}
+
+.CJLGeneralChatRoom {
+	display: block;
+	border: 2px solid #4f4e49;
+	height: 258px;
+	margin-top: 5px;
+}
+
+.CJLChatLeftPart {
+	display: block;
+	border: 2px solid #4f4e49;
+	width: 56%;
+	height: 95%;
+	float: left;
+	margin: 5px;
+}
+
+.CJLChatRightPart {
+	display: block;
+	border: 2px solid #4f4e49;
+	width: 40%;
+	height: 95%;
+	float: right;
+	margin: 5px;
+}
+
+.CJLChatMessageTextArea {
+	background-color: #f7fcf8;
+	margin: 1px;
+	width: 98%;
+	height: 70%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	resize: none;
+	word-wrap: break-word;
+}
+
+.CJLChatMessageInputArea {
+	background-color: #f7fcf8;
+	margin: 5px;
+	width: 96%;
+	height: 18%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	resize: none;
+	word-wrap: break-word;
+}
+
+.CJLChatUserTextArea {
+	background-color: #f7fcf8;
+	margin: 1px;
+	width: 97%;
+	height: 96%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	resize: none;
+	word-wrap: break-word;
+}
+
+
+.CJLChatUserContainer {
+	background-color: #f7fcf8;
+	margin: 1px;
+	width: 98%;
+	height: 70%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	resize: none;
+	word-wrap: break-word;
+}
+
+.CJLTable {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.CJLTableHeaderCell {
+	border: 1px solid black;
+    text-align: center;
+    font-size: 140%;
+    font-weight: bold;
+}
+
+.CJLTableCell {
+	border: 1px solid black;
+    padding: 4px;
+    font-size: 110%;
+}
+
+.CJLTableRowSelected {
+    background-color: brown;
+    color: #FFF;
 }

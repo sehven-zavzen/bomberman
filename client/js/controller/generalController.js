@@ -33,3 +33,7 @@ function denekAnim(posX, posY) {
     denekAnim();
 });*/
 
+
+function openBomberman() {
+	window.open('play', "_self");
+}

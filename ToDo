@@ -48,11 +48,39 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 
 19.12.2017
 ----------
-* Bomb animation - try generic
+* Bomb animation - try generic - almost done, needs refactor
+
+20.12.2017
+----------
+* Login ekranında icon seçilebilir - play için kullanılabilir - done
+* index.html -> username input, join butonu - done
+
+21.12.2017
+----------
+* open next html in same window - done
+* general design joinCreateListRoom html file - done
+* basic game list
+** click create game (basic), dblClickable row (how) - done
+** click create game popup çıkarsın oda ismi için
+* create-join-generalRoomChat-roomList html file after index.html - done
+* index.html join button - client, server operations
+
+* Use chosen icon in next html, use icon while chatting, playerIcon + name in chat room list
+
 
 
 
 Sonra yapılacaklar
+* Spectate mode ? :D
+* Refactor animation files
+* Join için Enter butonu
+* Bir süre sonra bomba gücü otomatikte artabilir, herkes için
+* Oyun alanı bir süre sonra daralacak - Eren
+* Icon kısmı yuvarlak olsun - https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form
+* İsim girmezse JOIN disable olmalı
+* Oyun başladığında bu sensin oku çıkabilir
+* Eğer socket.name yoksa bomberman.html ye geçmeyebilir, tekrar index.html ye yönlendirebilir
+* Bombayı bıraktığında playerın görüntüsü bir garip oluyor - player üstüne çizilen bomba animasyonu 
 * 'Refactor' -> Canvas hesaplamaları obje içerisinde yapılabilir
 * 'Refactor' -> Sabit değerlere dokunulması gerekiyor - e.g 20 for width, height wall, place
 * Restart game
@@ -60,7 +88,8 @@ Sonra yapılacaklar
 * Remove dced players
 * Dced clients color will be available to other clients
 * Game rooms
-* Chat
+* Chat - public, private, general or in room chat - belki private msglar userın ismine tıklayarak yapılabilir
+* Chat commands
 * Loglama
 * Score
 ** General Message place

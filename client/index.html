@@ -1,36 +1,57 @@
-<!-- <canvas id="ctx" width="500" height="500" style="border:1px solid #000000;"></canvas> -->
 
 
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" src="./client/css/general.css">
+	<link rel="stylesheet" type="text/css" href="./client/css/index.css">
+	<link rel="stylesheet" type="text/css" href="./client/css/imageSlider.css">
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="./client/js/maze/generateMaze.js"></script>
-	<script src="./client/js/animate/mainAnimation.js"></script>
-
-	<script src="./client/js/controller/drawController.js"></script>
-	<script src="./client/js/controller/playerController.js"></script>
 	<script src="./client/js/controller/generalController.js"></script>
-
-
+	<script src="./client/js/controller/indexController.js"></script>
 </head>
 
 
-<body>
-	<button onclick="generateMaze()">Generate Maze</button>
-	<button onclick="restartScene()">RESTART</button>
-	<div class="row"> 
-		<button id="player1" class="player-button-class" onclick="createPlayer('blue', 'player1')"> Blue </button>
-		<button id="player2" class="player-button-class" onclick="createPlayer('green', 'player2')"> Green </button>
-		<button id="player3" class="player-button-class" onclick="createPlayer('red', 'player3')"> Red </button>
-		<button id="player4" class="player-button-class" onclick="createPlayer('yellow', 'player4')"> Yellow </button>
-		<button id="player5" class="player-button-class" onclick="createPlayer('orange', 'player5')"> Orange </button>
-		<button id="player6" class="player-button-class" onclick="createPlayer('purple', 'player6')"> Purple </button> 
+<body class="background">
+	<div>
+	  <!-- <div class="imgcontainer">
+	    <img src="/client/img/coin.jpg" alt="Avatar" class="avatar">
+	  </div> -->
+	<div class="bigCenterLabel">
+	  <label><b>Choose an icon</b></label>
 	</div>
-	<canvas id="gameArea" style="border:1px solid #000000;"></canvas>
-	<canvas id="denek" width="300" height="220"></canvas>
+	  <div id="slideshow">
+
+	    <ul class="slides">
+	        <li><img id="small_cat.png" src="/client/img/playerIcons/big_cat.png" width="208" height="208" /></li>
+	        <li><img id="small_frog.png" src="/client/img/playerIcons/big_frog.png" width="208" height="208" /></li>
+	        <li><img id="small_hippo.png" src="/client/img/playerIcons/big_hippo.png" width="208" height="208" /></li>
+	        <li><img id="small_lion.png" src="/client/img/playerIcons/big_lion.png" width="208" height="208" /></li>
+	        <li><img id="small_mouse.png" src="/client/img/playerIcons/big_mouse.png" width="208" height="208" /></li>
+	        <li><img id="small_panda.png" src="/client/img/playerIcons/big_panda.png" width="208" height="208" /></li>
+	        <li><img id="small_panther.png" src="/client/img/playerIcons/big_panther.png" width="208" height="208" /></li>
+	        <li><img id="small_rabbit.png" src="/client/img/playerIcons/big_rabbit.png" width="208" height="208" /></li>
+	        <li><img id="small_zebra.png" src="/client/img/playerIcons/big_zebra.png" width="208" height="208" /></li>
+	        <li><img id="small_turtle1.png" src="/client/img/playerIcons/big_turtle1.png" width="208" height="208" /></li>
+	        <li><img id="small_turtle2.png" src="/client/img/playerIcons/big_turtle2.png" width="208" height="208" /></li>
+	        <li><img id="small_turtle3.png" src="/client/img/playerIcons/big_turtle3.png" width="208" height="208" /></li>
+	        <li><img id="small_turtle4.png" src="/client/img/playerIcons/big_turtle4.png" width="208" height="208" /></li>
+	    </ul>
+
+	    <span class="arrow previous"></span>
+	    <span class="arrow next"></span>
+	</div>
+
+	  <div class="formContainer" style="width: 500px">
+	    <input type="text" placeholder="Enter Username" id="username" required>
+	    
+	    <!-- TODO: game create-join-list room htmline yonlenmeli -->
+		<button type="input" onclick="openBomberman()">Simdilik Oyuna Geçme Butonu - Kaldırılacak</button>
+
+	    <button type="input" onclick="enterToCreateJoinListRoom()">JOIN</button>
+	    
+	  </div>
+	</div>
 </body>
 
 </html>
