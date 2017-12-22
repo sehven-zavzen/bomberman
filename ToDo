@@ -44,7 +44,7 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 
 17.12.2017
 ----------
-* Add "S" -> stone to maze - can't be exploded
+* Add "S" -> stone to maze - can't be exploded - done
 
 19.12.2017
 ----------
@@ -65,7 +65,9 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 * create-join-generalRoomChat-roomList html file after index.html - done
 * index.html join button - client, server operations
 
-* Use chosen icon in next html, use icon while chatting, playerIcon + name in chat room list
+22.12.2017
+----------
+* implement chat actions (general_room list) for createJoinListRoom.html
 
 
 http://www.mredkj.com/tutorials/tutorial005.html
@@ -74,6 +76,9 @@ https://socket.io/docs/rooms-and-namespaces/
 
 
 Sonra yapılacaklar
+* logout olma ya da sayfayı kapama durumunda chat listelerinden sil, SOCKET_LIST, PLAYER_LIST ten sil
+* aynı isimli userlar login olamasın
+* bomba spritenın backgroundı var
 * Spectate mode ? :D
 * Refactor animation files
 * Join için Enter butonu
@@ -93,6 +98,7 @@ Sonra yapılacaklar
 * Game rooms
 * Chat - public, private, general or in room chat - belki private msglar userın ismine tıklayarak yapılabilir
 * Chat commands
+* Player Db - register - login şu bu
 * Loglama
 * Score
 ** General Message place
@@ -100,6 +106,10 @@ Sonra yapılacaklar
 ** Private message
 ** Create chat room
 ** List and join created rooms
+* Use chosen icon in next html, use icon while chatting, playerIcon + name in chat room list
+
 
 Belki yapılacaklar
+* Chat User Icon - stars for player lvl
+* Chat User List için
 * Rejoin - belki - ip den tutulabilir

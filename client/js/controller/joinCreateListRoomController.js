@@ -1,15 +1,52 @@
 socket = io();
 
+//sayfa yenilendiğinde ve user ilk giriste redirect yaptıgı icin user listi cekiyor
 $(window).on('load', function(){
-
 	socket.emit('requestToGetGeneralRoomUserList');
+});
 
-	socket.on('refreshGeneralRoomUserList', function(userList) {
-	    
-	    //TODO: user listesini yenile
-		console.log(userList);
+//herhangi bir user join yaptığında refresh liste
+socket.on('refreshGeneralRoomUserList', function(userList) {
+	var elSel = document.getElementById('userList');
 
-	});
+	var user;
+	for (var i in userList) {
+		user = userList[i]; 
+
+		//TODO: Could be perfomance issues, ilerde düzeltilebilir
+		var item, boolFind = false;
+
+		for(var j = 0; j < elSel.length; j++) {
+			item = elSel[j];
+			if (item.value == user.userId) {
+				boolFind = true;
+				break;
+			}
+		}
+
+		if (!boolFind) {
+			var elOptNew = document.createElement('option');
+		    elOptNew.value = user.userId;
+		    elOptNew.innerHTML = '&#127775; ' + user.username; //TODO: yildiz yerine sectigi icon gelseydi iyiydi ama düz select componenti yapamiyormus
+		    elOptNew.userIcon = user.userIcon; 
+
+		    if (elSel.length == 0) {
+		    	elSel.add(elOptNew, null);
+		    } else {
+		    	var elOptOld = elSel.options[0];  
+			    try {
+			      elSel.add(elOptNew, elOptOld); // standards compliant; doesn't work in IE
+			    }
+			    catch(ex) {
+			      elSel.add(elOptNew, elSel.selectedIndex); // IE only
+			    }
+		    }
+		}
+
+		
+	}
+		
+	console.log(userList);
 
 });
 

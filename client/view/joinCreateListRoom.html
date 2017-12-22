@@ -2,11 +2,13 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="./client/css/general.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./client/css/dd.css"> -->
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+	<!-- <script src="./client/js/lib/jquery.dd.js"></script> -->
 	<script src="./client/js/animate/mainAnimation.js"></script>
 
+	<script src="./client/js/util/util.js"></script>
 	<script src="./client/js/controller/generalController.js"></script>
 	<script src="./client/js/controller/joinCreateListRoomController.js"></script>
 
@@ -40,11 +42,18 @@
 				<textarea id="chat-input" class="CJLChatMessageInputArea"></textarea>
 			</div>
 			<div class="CJLChatRightPart">
-				<ul style="list-style-type:none; margin-top: 5px; padding-left: 12px;">
+				<label class="CJLLabel"> User List </label>
+				<select id="userList" multiple="multiple" class="CJLChatUserListArea">
+					<!-- <option value="original1" data-image="../client/img/playerIcons/small_cat.png"> Orig1 </option>
+					<option value="original2">Orig2</option> -->
+				</select>
+
+
+				<!-- <ul style="list-style-type:none; margin-top: 5px; padding-left: 12px;">
 				  <li>Coffee</li>
 				  <li>Tea</li>
 				  <li>Milk</li>
-				</ul>
+				</ul> -->
 
 				<!-- <textarea class="CJLChatUserTextArea" readonly></textarea> -->
 			</div>

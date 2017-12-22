@@ -33,32 +33,43 @@ var PLAYER_LIST = {}; //TODO: refactor - baska dosyalara al
 var BOMB_LIST = {}; //TODO: refactor - baska dosyalara al
 var GENERAL_ROOM_NAME = 'general_room'; //TODO: refactor - constant baska dosyalara al - require yapılabilir constant dosyası
 
-
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
 
+	/////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////CHAT RELATED STARTS//////////////////////////////////////
+
+	
+
+	/////////////////////////////////CHAT RELATED ENDS///////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////JOINING AS A USER STARTS////////////////////////////////////
 	socket.on('enterAsAUser', function(user) {
 		var id = Math.random();
-		socket.id = id;
+		socket._id = id;
 		socket._username = user.username;
 		socket._userIcon = user.userIcon;
+		socket._currentRoomName = GENERAL_ROOM_NAME;
 		SOCKET_LIST[id] = socket;
 
 		socket.join(GENERAL_ROOM_NAME); //Enter to general_room
 
+		refreshGeneralRoomUserList();
 	});
 
 	socket.on('requestToGetGeneralRoomUserList', function() {
-		var userList = {};
-		for (var i in SOCKET_LIST) {
-			var userId = SOCKET_LIST[i].id;
-			var user = {userId: userId, userIcon: SOCKET_LIST[i]._userIcon, username: SOCKET_LIST[i]._username};
-			userList[userId] = user;
-		}
-
-		io.sockets.emit('refreshGeneralRoomUserList', userList);
+		refreshGeneralRoomUserList();
 	});
+	///////////////////////////////JOINING AS A USER ENDS////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////
 
+
+	/////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////GAME RELATED STARTS//////////////////////////////////////
 	socket.on('restartScene', function() {
 
 		/*SOCKET_LIST = {};*/
@@ -122,6 +133,11 @@ io.sockets.on('connection', function(socket){
 	        delete PLAYER_LIST[player.id];
     	}
     });
+	//////////////////////////////////GAME RELATED ENDS//////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////
+
+
+    
    
 });
 
@@ -164,7 +180,16 @@ setInterval(function(){
 
 },1000/25);
 
+function refreshGeneralRoomUserList() {
+	var userList = {};
+	for (var i in SOCKET_LIST) {
+		var userId = SOCKET_LIST[i]._id;
+		var user = {userId: userId, userIcon: SOCKET_LIST[i]._userIcon, username: SOCKET_LIST[i]._username, currentRoomName: SOCKET_LIST[i]._currentRoomName};
+		userList[userId] = user;
+	}
 
+	io.sockets.emit('refreshGeneralRoomUserList', userList);
+}
 
 function playerPutBomb(io, player) {
 	var idBomb = Math.random();

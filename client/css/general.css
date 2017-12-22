@@ -134,15 +134,11 @@
 	word-wrap: break-word;
 }
 
-.CJLChatUserTextArea {
+.CJLChatUserListArea {
 	background-color: #f7fcf8;
-	margin: 1px;
-	width: 97%;
-	height: 96%;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	resize: none;
-	word-wrap: break-word;
+	width: 99%;
+	height: 88%;
+	margin: 2px;
 }
 
 
