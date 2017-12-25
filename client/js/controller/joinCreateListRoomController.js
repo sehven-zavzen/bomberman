@@ -1,8 +1,18 @@
 socket = io();
 
+var username;
 //sayfa yenilendiğinde ve user ilk giriste redirect yaptıgı icin user listi cekiyor
 $(window).on('load', function(){
 	socket.emit('requestToGetGeneralRoomUserList');
+
+	var params = get_params(location.search);
+	var userIcon = params['i'];
+	username = params['n'];
+
+	document.getElementById('userIcon').src = '/client/img/playerIcons/' + userIcon;
+	document.getElementById('username').innerHTML = username;
+
+
 });
 
 //herhangi bir user join yaptığında refresh liste

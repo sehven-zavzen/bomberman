@@ -18,6 +18,10 @@ app.get("/gameRoom", function(req, res) {
     res.sendFile(__dirname + '/client/view/gameRoom.html');
 });
 
+app.get("/post", function(req, res) {
+    res.sendFile(__dirname + '/client/view/notToView/post.htm');
+});
+
 app.use('/client',express.static(__dirname + '/client'));
  
 //TODO: Olmazsa aç
@@ -44,6 +48,8 @@ io.sockets.on('connection', function(socket){
 		console.log(data.message);
 
 		console.log(socket._username);
+		console.log(socket._userIcon);
+		console.log(socket.username);
 		console.log(username);
 	});
 	
@@ -57,17 +63,20 @@ io.sockets.on('connection', function(socket){
 	/////////////////////////////JOINING AS A USER STARTS////////////////////////////////////
 	socket.on('enterAsAUser', function(user) {
 		username = user.username;
-
 		console.log(username);
-
 		var id = Math.random();
+		var roomName = GENERAL_ROOM_NAME;
 		socket._id = id;
 		socket._username = user.username;
 		socket._userIcon = user.userIcon;
-		socket._currentRoomName = GENERAL_ROOM_NAME;
+		socket._currentRoomName = roomName;
 		SOCKET_LIST[id] = socket;
 
 		socket.join(GENERAL_ROOM_NAME); //Enter to general_room
+
+		var sendBackData = {userId: id, currentRoomName: roomName};
+
+		socket.emit('sendBackUserId', sendBackData);
 
 		refreshGeneralRoomUserList();
 	});
@@ -139,6 +148,8 @@ io.sockets.on('connection', function(socket){
     });
 
     socket.on('disconnect',function(){
+    	console.log('Next page?');
+
     	if (player) {
 			/*delete SOCKET_LIST[player.id];*/
 	        delete PLAYER_LIST[player.id];

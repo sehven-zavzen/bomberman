@@ -1,4 +1,4 @@
-socket = io();
+var socket = io();
 
 /*.keydown(function (event) { 
   // TODO: When the client hits ENTER on their keyboard and chat input area is focused
@@ -12,8 +12,6 @@ socket = io();
     }
   }
 });*/
-
-var username;
 
 document.onkeydown = function(event){
     if (event.which === 13) {

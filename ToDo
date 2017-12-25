@@ -69,6 +69,11 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 ----------
 * implement chat actions (general_room list) for createJoinListRoom.html
 
+25.12.2017
+----------
+* Giris yaptıktan sonra  Player name, Icon name, Player Id, Current Room bir yerde tutmak gerekiyor - url parameter - done
+* implement chat actions (general_room list) for createJoinListRoom.html - devam
+
 
 http://www.mredkj.com/tutorials/tutorial005.html
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
@@ -76,6 +81,8 @@ https://socket.io/docs/rooms-and-namespaces/
 
 
 Sonra yapılacaklar
+* joinCreateListRoom.html default user icon
+* Bomba animasyonu first frame shows after bomb
 * logout olma ya da sayfayı kapama durumunda chat listelerinden sil, SOCKET_LIST, PLAYER_LIST ten sil
 * aynı isimli userlar login olamasın
 * bomba spritenın backgroundı var

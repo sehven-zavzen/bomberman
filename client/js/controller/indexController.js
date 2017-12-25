@@ -144,10 +144,24 @@ function setCurrentIcon(str) {
 
 function enterToCreateJoinListRoom() {
 
+    var userId = 0;
+    var currentRoom = '';
     var username = $("#username").val();
     var user = {userIcon: currentIcon, username: username};
-    socket.emit('enterAsAUser', user);
 
-    //TODO: redirect to joinCreateListRoom
-    window.open('joinCreateListRoom', "_self");
+    socket.emit('enterAsAUser', user);
+    
+    socket.on('sendBackUserId', function(data) {
+        userId = data.userId;
+        currentRoom = data.currentRoomName;
+
+        var link = 'joinCreateListRoom';
+        link = link + '?n=' + username;
+        link = link + '&i=' +  getGoodSizeOfIcon(currentIcon, 'medium');
+        link = link + '&id=' + userId;
+        link = link + '&r=' + currentRoom;
+        
+        window.open(link, '_self');
+    });
 }
+

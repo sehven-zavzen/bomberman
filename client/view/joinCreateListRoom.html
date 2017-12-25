@@ -20,7 +20,8 @@
 	
 	<div class="CJLAllContainer">
 		<div class="CJLUserContainer">
-			<img src="/client/img/playerIcons/medium_cat.png" />
+			<img id="userIcon" src="" class="CJLUserIcon" />
+			<label id="username" class="CJLUsernameLabel"></label>
 		</div>
 
 		<div class="CJLTopButtonsContainer">
@@ -48,18 +49,7 @@
 			<div class="CJLChatRightPart">
 				<label class="CJLLabel"> User List </label>
 				<select id="userList" multiple="multiple" class="CJLChatUserListArea">
-					<!-- <option value="original1" data-image="../client/img/playerIcons/small_cat.png"> Orig1 </option>
-					<option value="original2">Orig2</option> -->
 				</select>
-
-
-				<!-- <ul style="list-style-type:none; margin-top: 5px; padding-left: 12px;">
-				  <li>Coffee</li>
-				  <li>Tea</li>
-				  <li>Milk</li>
-				</ul> -->
-
-				<!-- <textarea class="CJLChatUserTextArea" readonly></textarea> -->
 			</div>
 		</div>
 
