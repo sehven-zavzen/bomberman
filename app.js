@@ -36,9 +36,16 @@ var GENERAL_ROOM_NAME = 'general_room'; //TODO: refactor - constant baska dosyal
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
 
+	var username;
 	/////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////CHAT RELATED STARTS//////////////////////////////////////
+	socket.on('new-message', function(data) {
+		console.log(data.username);
+		console.log(data.message);
 
+		console.log(socket._username);
+		console.log(username);
+	});
 	
 
 	/////////////////////////////////CHAT RELATED ENDS///////////////////////////////////////
@@ -49,6 +56,10 @@ io.sockets.on('connection', function(socket){
 	/////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////JOINING AS A USER STARTS////////////////////////////////////
 	socket.on('enterAsAUser', function(user) {
+		username = user.username;
+
+		console.log(username);
+
 		var id = Math.random();
 		socket._id = id;
 		socket._username = user.username;

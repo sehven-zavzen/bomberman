@@ -9,7 +9,6 @@ $(window).on('load', function(){
 socket.on('refreshGeneralRoomUserList', function(userList) {
 	var elSel = document.getElementById('userList');
 
-	var user;
 	for (var i in userList) {
 		user = userList[i]; 
 

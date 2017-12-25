@@ -11,7 +11,7 @@
 	<script src="./client/js/util/util.js"></script>
 	<script src="./client/js/controller/generalController.js"></script>
 	<script src="./client/js/controller/joinCreateListRoomController.js"></script>
-
+	<script src="./client/js/controller/chatController.js"></script>
 
 </head>
 
@@ -19,6 +19,10 @@
 <body class="CJLBackground">
 	
 	<div class="CJLAllContainer">
+		<div class="CJLUserContainer">
+			<img src="/client/img/playerIcons/medium_cat.png" />
+		</div>
+
 		<div class="CJLTopButtonsContainer">
 			<button onclick="createGame()" class="CJLTopButton">Create Game</button>
 			<button onclick="" class="CJLTopButton">Join Game</button>	
@@ -38,8 +42,8 @@
 		<label class="CJLLabel"> General Chat Room </label>
 		<div class="CJLGeneralChatRoom">
 			<div class="CJLChatLeftPart">
-				<textarea class="CJLChatMessageTextArea" readonly></textarea>
-				<textarea id="chat-input" class="CJLChatMessageInputArea"></textarea>
+				<textarea id="messages" class="CJLChatMessageTextArea" readonly></textarea>
+				<textarea id="chatInput" class="CJLChatMessageInputArea"></textarea>
 			</div>
 			<div class="CJLChatRightPart">
 				<label class="CJLLabel"> User List </label>

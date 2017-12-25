@@ -21,7 +21,7 @@
 	vertical-align: middle;
 	padding: 10px;
 	width: 800px;
-	height: 700px;
+	height: 750px;
 }
 
 .CJLTopButtons {
@@ -30,6 +30,15 @@
 	margin-left: auto;
 	margin-right: auto;
 	vertical-align: middle;
+}
+
+.CJLUserContainer {
+	display: block;
+	border: 2px solid #4f4e49;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+	height: 40px;
 }
 
 .CJLTopButtonsContainer {
