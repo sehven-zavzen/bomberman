@@ -22,7 +22,7 @@ document.onkeydown = function(event){
 
 //TODO: Make it generic later - I mean check player room
 // Sends a chat message
-function sendMessage () {
+function sendMessage (r) {
   var message = $("#chatInput").val();
   
   message = message.trim();

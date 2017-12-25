@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/chat.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/clockStyle.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/bomberman.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/maze.css" />
+	<script src="/javascripts/util.js"></script>
+	<script src="/javascripts/gameController.js"></script>
+
+    <title>Bomberman</title>
+</head>
+<body>
+	<div class="row bomberman-settings-container">
+		<button class="bomberman-settings-button" onclick="callMaze('bombermanCanvas')"> GENERATE MAZE </button>
+		<button class="bomberman-settings-button" onclick=""> START </button>
+	</div>
+
+
+	<div class="row">
+		<div class="bomberman-player-color-container">
+			<div class="text-center" style="font-weight: bold;"> Choose a color </div>
+				<button class="bomberman-player-color-button" style="margin-top: 10px; background-color: #4CAF50;"></button>
+				<button class="bomberman-player-color-button" style="background-color: #008CBA;"></button>
+				<button class="bomberman-player-color-button" style="background-color: #f44336;"></button>
+				<button class="bomberman-player-color-button" style="background-color: #a7e2e7;"></button>
+				<button class="bomberman-player-color-button" style="background-color: #555555;"></button>
+				<button class="bomberman-player-color-button" style="background-color: #ff8c00;"></button>
+		</div>
+		<div class="bomberman-field-container">
+			<canvas width="680px" height="580px" id="bombermanCanvas"></canvas>
+		</div>
+	</div>
+<script src="/javascripts/chat.js"></script>
+<script src="/javascripts/mazeGenerator.js"></script>
+</body>
+</html>

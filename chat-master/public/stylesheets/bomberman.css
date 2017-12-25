@@ -1,0 +1,46 @@
+.bomberman-settings-container {
+	width: 810px;
+	height: 100px;
+    border-style: solid;
+    float: left;
+	resize: none;
+	margin-top: 10px;
+}
+
+.bomberman-player-color-container {
+	height: 550px;
+	width: 80px;
+    border-style: solid;
+    float: left;
+	resize: none;
+	margin-top: 0px;
+}
+
+.bomberman-field-container {
+	width: 725px;
+	height: 625px;
+	margin-left: 20px;
+    border-style: solid;
+    float: left;
+	resize: none;
+	margin-top: 0px;
+}
+
+.bomberman-player-color-button {
+	height: 60px;
+	width: 60px;
+	margin: 0px 10px 10px 10px;
+	float: left;
+}
+
+.bomberman-settings-button {
+	width: 90px;
+	height: 90px;
+	float: left;
+	margin: 5px;
+	font-weight: bold;
+}
+
+/*
+	TODO: bomberman-ready-button, bomberman-start-button;
+*/

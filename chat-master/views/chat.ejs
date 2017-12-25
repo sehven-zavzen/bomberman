@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="/javascripts/lib/box2d.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/chat.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/clockStyle.css" />
+	<script src="/javascripts/messageConverter.js"></script>
+	<script src="/javascripts/clock.js"></script>
+	<script src="/javascripts/util.js"></script>
+	<script src="/javascripts/gameController.js"></script>
+	
+	<script src="/javascripts/box2d/b2jsTest.js"></script>
+	<script src="/javascripts/box2d/b2jsTestPendulum.js"></script>
+
+	
+	
+	<script>
+		
+
+	</script>
+
+    <title>Chat and Clock and Todo List</title>
+</head>
+<body>
+<div id="fallZone">
+	<div class="row" style="margin-top:20px">
+		
+		<div class="column-simple">
+			<div class="analog-clock">
+				<svg width="140" height="140">
+					<circle id="clock-face" cx="70" cy="70" r="65" />
+					<line id="h-hand" x1="70" y1="70" x2="70" y2="38" />
+					<line id="m-hand" x1="70" y1="70" x2="70" y2="20" />
+					<line id="s-hand" x1="70" y1="70" x2="70" y2="12" />
+					<line id="s-tail" x1="70" y1="70" x2="70" y2="56" />
+					<text x="62" y="18">12</text>
+					<text x="126" y="76">3</text>
+					<text x="66" y="130">6</text>
+					<text x="7" y="76">9</text>
+				</svg>
+				<div class="time-text">
+					<span id="hr">00</span>
+					<span>:</span>
+					<span id="min">00</span>
+					<span>:</span>
+					<span id="sec">00</span>
+					<span id="suffix">--</span>
+				</div>
+			</div>
+		</div>
+		
+		<div id="chat-room" class="column-simple chat-room"></div>
+		<div class="column-simple username-field">
+			<div class="big-and-middle"> USERNAME </div>
+			<div>
+				<input id="username" class="big-and-middle" style="width: 100%;" type="text" maxlength="14" />
+			</div>
+			<div class="big-and-middle">
+				<button class="join-button" onclick="joinRoom()">JOIN</button>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="column-simple">
+			<div>
+				<div class="tab">
+					<button class="tablinks" onclick="openTab(event, 'ChatContainer')">CHAT</button>
+  					<button class="tablinks" onclick="openTab(event, 'GameContainer')" disabled>GAME</button>
+  					<button class="tablinks" onclick="openTab(event, 'MazeGameContainer')" disabled>MAZE GAME</button>
+  					<button class="tablinks" onclick="openTab(event, 'PendulumContainer')">PENDULUM</button>
+  					<button id="defaultOpenTab" class="tablinks" onclick="openTab(event, 'DenekContainer')">DENEK</button>
+  					<button class="tablinks" onclick="openTab(event, 'DenekContainer')">CAVGA PLAYER</button>
+				</div>
+				
+				<div id="ChatContainer" class="tabcontent">
+					<div id="chat-container"></div>
+				</div>
+				
+				<div id="GameContainer" class="tabcontent">
+
+					<div class="text-center" style="margin: 5px 10px 10px 10px">
+						<button style="font-size: 120%;" onclick="generateMaze()"> GENERATE MAZE </button>
+					</div>
+					
+					<div class="player-color-container">
+						<div class="text-center" style="font-weight: bold;"> Choose a color </div>
+						<button class="player-color-button" style="margin-top: 10px; background-color: #4CAF50;"></button>
+						<button class="player-color-button" style="background-color: #008CBA;"></button>
+						<button class="player-color-button" style="background-color: #f44336;"></button>
+						<button class="player-color-button" style="background-color: #a7e2e7;"></button>
+						<button class="player-color-button" style="background-color: #555555;"></button>
+						<button class="player-color-button" style="background-color: #ff8c00;"></button>
+					</div>
+					
+					<div class="game-canvas-container">
+						<canvas width="620" height="320" id="can"></canvas>
+					</div>
+				</div>
+
+				<div id="MazeGameContainer" class="tabcontent">
+
+					<div class="text-center" style="margin: 30px 30px 10px 10px">
+						<button style="font-size: 120%;" onclick="callMaze('mazeCanvas')"> GENERATE MAZE </button>
+					</div>
+					
+					<div class="player-color-container">
+						<div class="text-center" style="font-weight: bold;"> Choose a color </div>
+						<button class="player-color-button" style="margin-top: 10px; background-color: #4CAF50;"></button>
+						<button class="player-color-button" style="background-color: #008CBA;"></button>
+						<button class="player-color-button" style="background-color: #f44336;"></button>
+						<button class="player-color-button" style="background-color: #a7e2e7;"></button>
+						<button class="player-color-button" style="background-color: #555555;"></button>
+						<button class="player-color-button" style="background-color: #ff8c00;"></button>
+					</div>
+					
+					<div class="game-canvas-container">
+						<canvas width="620px" height="320px" id="mazeCanvas"></canvas>
+					</div>
+				</div>
+
+				<div id="PendulumContainer" class="tabcontent">
+					<canvas id="pendulumCanvas" width="480" height="270"></canvas>
+				</div>
+
+				<div id="DenekContainer" class="tabcontent">
+					<button onclick="goToBomberman()">ASD</button>
+				</div>
+
+				<textarea id="chat-input" disabled="true"></textarea>
+			</div>
+		</div>
+		
+		<div class="column-simple">
+		
+			<div>
+				<div>
+					<div class="text-center"> TODO LIST </div>
+					</br>
+					* Chat alanındaki 2 Tab karakteri - Done
+					</br>
+					* Chat Container scrollbar - Done
+					</br>
+					* Gifler loop forever - Done
+					</br>
+					* Login olan insanların tutulduğu pencere - Kısmen done
+					</br>
+					* Login username - chat kim ne yazdı - Kısmen done
+					</br>
+					* Dinamik todo list
+					</br>
+					* Hohoy is typing ... ibaresi
+					</br>
+					* Birisi ayrıldı ... ibaresi
+					</br>
+					* Mesaj geldiğinde alert
+					</br>
+					* Yazılanların saklanması
+					</br>
+					* Gif kalitesi
+					</br>
+					* Play komutu popup sorunu
+				</div>
+				
+				<div style="margin-top: 20px">
+					<div>
+						<div class="text-center"> COMMANDS </div>
+						</br>
+						* !fall message -> Exp: !fall Mükemmel
+						</br>
+						* !alert message -> Exp: !fall Mükemmel
+						</br>
+						* !play videolinki -> Exp: !play https://www.youtube.com/watch?v=fqq7D3FimJ8
+						</br>
+							--- Popup a izin vermeli
+					</div>
+				</div>
+				
+			</div>
+		
+		</div>
+	
+	</div>
+
+</div>
+
+<script src="/javascripts/chat.js"></script>
+<script src="/javascripts/mazeGenerator.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/chat.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/clockStyle.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/game.css" />
+	<script type="text/javascript" src="/javascripts/messageConverter.js"></script>
+	<script type="text/javascript" src="/javascripts/clock.js"></script>
+	<script type="text/javascript" src="/javascripts/util.js"></script>
+	<script type="text/javascript" src="/javascripts/gameController.js"></script>
+    <title>Chat and Clock and Todo List</title>
+</head>
+<body>
+<div id="fallZone">
+	<div style="margin-top:20px">
+		
+		
+		<div class="analog-clock">
+			<svg width="140" height="140">
+				<circle id="clock-face" cx="70" cy="70" r="65" />
+				<line id="h-hand" x1="70" y1="70" x2="70" y2="38" />
+				<line id="m-hand" x1="70" y1="70" x2="70" y2="20" />
+				<line id="s-hand" x1="70" y1="70" x2="70" y2="12" />
+				<line id="s-tail" x1="70" y1="70" x2="70" y2="56" />
+				<text x="62" y="18">12</text>
+				<text x="126" y="76">3</text>
+				<text x="66" y="130">6</text>
+				<text x="7" y="76">9</text>
+			</svg>
+			<div class="time-text">
+				<span id="hr">00</span>
+				<span>:</span>
+				<span id="min">00</span>
+				<span>:</span>
+				<span id="sec">00</span>
+				<span id="suffix">--</span>
+			</div>
+		</div>
+	</div>
+	
+	<div>
+		<div class="left-side">
+			<div>
+				<div id="chat-container">
+				</div>
+
+				<textarea id="chat-input"></textarea>
+			</div>
+		</div>
+		<div class="right-side" style="margin-left: 15px">
+			<div>
+				<div style="width='140' height='140'"></div>
+				<div>
+					<div class="text-center"> TODO LIST </div>
+					</br>
+					* Chat alanındaki 2 Tab karakteri - Done
+					</br>
+					* Chat Container scrollbar - Done
+					</br>
+					* Gifler loop forever - Done
+					</br>
+					* Login olan insanların tutulduğu pencere (simdilik ip ile)
+					</br>
+					* Dinamik todo list
+					</br>
+					* Login username - chat kim ne yazdı
+					</br>
+					* Hohoy is typing ... ibaresi
+					</br>
+					* Birisi ayrıldı ... ibaresi
+					</br>
+					* Mesaj geldiğinde alert
+					</br>
+					* Yazılanların saklanması
+					</br>
+					* Gif kalitesi
+					</br>
+					* Play komutu popup sorunu
+				</div>
+			</div>
+			
+			<div style="margin-top: 20px">
+				<div style="width='140' height='140'"></div>
+				<div>
+					<div class="text-center"> COMMANDS </div>
+					</br>
+					* !fall message -> Exp: !fall Mükemmel
+					</br>
+					* !alert message -> Exp: !fall Mükemmel
+					</br>
+					* !play videolinki -> Exp: !play https://www.youtube.com/watch?v=fqq7D3FimJ8
+					</br>
+						--- Popup a izin vermeli
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/javascripts/chat.js"></script>
+</body>
+</html>
