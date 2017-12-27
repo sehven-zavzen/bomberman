@@ -14,27 +14,38 @@ var socket = io();
 });*/
 
 document.onkeydown = function(event){
+  //TODO: belki focuslanmısken gonderilebilir
     if (event.which === 13) {
+      event.preventDefault();
       sendMessage();
     }
 }
 
 
-//TODO: Make it generic later - I mean check player room
-// Sends a chat message
-function sendMessage (r) {
+// Send message to chat room - client -> server -> all clients
+function sendMessage () {
+  var username = $("#username").html();
   var message = $("#chatInput").val();
+  var currentRoom = $("#currentRoom").html();
   
   message = message.trim();
   // if there is a non-empty message and a socket connection
   //if (message && connected) {
-    $("#chatInput").val('');
+    $("#chatInput").val("");
 
     var chatObj = {
-      username: socket._username,
-      message: message
+      username: username,
+      message: message,
+      currentRoom: currentRoom
     };
     // tell server to execute 'new message' and send along one parameter
-    socket.emit('new-message', chatObj);
+    socket.emit('newMessage', chatObj);
   //}
 }
+
+socket.on('chatMessage', function(data) {
+  var username = data.username;
+  var message = data.message;
+
+  $("#chatMessagesArea").append(username + ": " + message + "<br />")
+});

@@ -118,10 +118,6 @@ Player = function(param) {
                 self.mapPositionY = newMapPosY;
             }
         }
-        /*if (self.putBomb) {
-        	console.log('bomb');
-        	putBomb(self);
-        }*/
         if (self.showMap) {
 			console.log('map bu ' + map[0].length + ' -- ' + map[1].length);
 			for (var i = 0; i < 20; i++) {
@@ -212,7 +208,7 @@ Bomb = function(param) {
 Wall = function(param) {
 	var self = this;
 	self.type = 'wall';
-	//TODO: mapPosition ve position gerekiyor, width, height
+
 	self.mapPositionX = param.mapPositionX;
 	self.mapPositionY = param.mapPositionY;
 	self.positionX = param.mapPositionX * 20;
@@ -222,6 +218,7 @@ Wall = function(param) {
 
 	return self;
 }
+
 
 
 

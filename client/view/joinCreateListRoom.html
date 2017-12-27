@@ -12,20 +12,25 @@
 	<script src="./client/js/controller/generalController.js"></script>
 	<script src="./client/js/controller/joinCreateListRoomController.js"></script>
 	<script src="./client/js/controller/chatController.js"></script>
+	<script src="./client/js/model/gameObject.js"></script>
 
 </head>
 
 
 <body class="CJLBackground">
+
+<!-- TODO: sil bunu, cöp -->
+	<!-- <button onclick="geriGit()"> Geri tuşu </button> -->
 	
 	<div class="CJLAllContainer">
 		<div class="CJLUserContainer">
 			<img id="userIcon" src="" class="CJLUserIcon" />
 			<label id="username" class="CJLUsernameLabel"></label>
+			<label id="currentRoom" hidden></label>
 		</div>
 
 		<div class="CJLTopButtonsContainer">
-			<button onclick="createGame()" class="CJLTopButton">Create Game</button>
+			<button onclick="openGameNameModal()" class="CJLTopButton">Create Game</button>
 			<button onclick="" class="CJLTopButton">Join Game</button>	
 		</div>
 		
@@ -33,6 +38,7 @@
 		<div class="CJLGameListContainer">
 			<table id="gameList" class="CJLTable">
 			  <tr>
+			  	<td style="display: none;"> Id </td>
 			    <td class="CJLTableHeaderCell" style="width: 280px"> Creator </td> <!-- Player Icon + Player Name -->
 			    <td class="CJLTableHeaderCell" style="width: 380px"> Room Name </td>
 			    <td class="CJLTableHeaderCell"> In Room </td>
@@ -43,7 +49,7 @@
 		<label class="CJLLabel"> General Chat Room </label>
 		<div class="CJLGeneralChatRoom">
 			<div class="CJLChatLeftPart">
-				<textarea id="messages" class="CJLChatMessageTextArea" readonly></textarea>
+				<div id="chatMessagesArea" class="CJLChatMessageTextArea"></div>
 				<textarea id="chatInput" class="CJLChatMessageInputArea"></textarea>
 			</div>
 			<div class="CJLChatRightPart">
@@ -52,9 +58,20 @@
 				</select>
 			</div>
 		</div>
-
 	</div>
 
+
+	<!-- The Modal GAME NAME -->
+	<div id="gameNameModal" class="modal">
+	  <div class="modal-content">
+	  		<span onclick="closeGameNameModal()" class="close">&times;</span>
+	  		<div style="margin-top: 40px;">
+	  			<label class="CJLLabel"> Game Name: </label>
+	    		<input type="text" placeholder="Enter A Game Name" id="gameName">
+	  		</div>
+	  		<button onclick="createGame()" class="CJLTopButton" style="width: 150px; float: right; margin-top: 20px;"> CREATE </button>
+	  </div>
+	</div>
 
 </body>
 

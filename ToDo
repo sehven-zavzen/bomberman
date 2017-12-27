@@ -59,11 +59,11 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 ----------
 * open next html in same window - done
 * general design joinCreateListRoom html file - done
-* basic game list
+* basic game list - done
 ** click create game (basic), dblClickable row (how) - done
-** click create game popup çıkarsın oda ismi için
+** click create game popup çıkarsın oda ismi için - done
 * create-join-generalRoomChat-roomList html file after index.html - done
-* index.html join button - client, server operations
+* index.html join button - client, server operations - done
 
 22.12.2017
 ----------
@@ -74,6 +74,26 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 * Giris yaptıktan sonra  Player name, Icon name, Player Id, Current Room bir yerde tutmak gerekiyor - url parameter - done
 * implement chat actions (general_room list) for createJoinListRoom.html - devam
 
+26.12.2017
+----------
+* implement chat actions (general_room list) for createJoinListRoom.html - görsel olarak oynanabilir (font, belki icon) - kısmen done
+* Create Game Popup modal for Game-Room name - done
+* Create Game function - game-room page (includes chat - Care To Chat Room (Test it), game properties (bomb power, start bomb count), Show joined players, Ready buttons)
+
+27.12.2017
+----------
+* After pressing popup game name modal -> create button
+** Emit game created to server - done
+** make a GAME_LIST in app.js - done
+** Create Game Object like Player, Bomb - Game Object includes -> Game Id, Game Properties (Bomb power, Bomb count, No undestructible walls) - done
+** Put Game Object to GAME_LIST - done
+** Server broadcasts a game created or sends back whole GAME_LIST to clients in "general_room"
+* Double click on a game list row or click a row and press JOIN button
+** Emit player joined a game to server (with game id and user id)
+** Redirects new player to game page
+** ..............
+* Create Game function - game-room page (includes chat - Care To Chat Room (Test it), game properties (bomb power, start bomb count), Show joined players, Ready buttons) - devam
+*** Simple page sadece yazı iceren
 
 http://www.mredkj.com/tutorials/tutorial005.html
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
@@ -81,10 +101,18 @@ https://socket.io/docs/rooms-and-namespaces/
 
 
 Sonra yapılacaklar
+* Game headerına bastığında birsey yapmamalı - ya da belki sadece sıralama 
+* Unique oda isimleri - varsa aynı isimli bir game ve listede yoksa game list refreshlenebilir
+* Oyunu kuran çıkıp, girebilmeli mi? Belki herkes çıkarsa oyun iptal olabilir? 
+* Chat-message divi auto scroll
+* Mini map
+* Game list search, order by name, checkbox to don't show full games
+* Cıkan kisi SOCKET_LIST te tutuluyor - onu PLAYER_LIST e cevirmek gerekebilir - JOIN oldugunda eklensin, sayfa degistiginde veya cıktıgında ordan cıksın (refresh hala muamma)
+* socket.io-1.4.5 localden kullanılacak
 * joinCreateListRoom.html default user icon
 * Bomba animasyonu first frame shows after bomb
 * logout olma ya da sayfayı kapama durumunda chat listelerinden sil, SOCKET_LIST, PLAYER_LIST ten sil
-* aynı isimli userlar login olamasın
+* aynı isimli userlar login olamasın - register, login belki ya da generate username
 * bomba spritenın backgroundı var
 * Spectate mode ? :D
 * Refactor animation files
@@ -120,3 +148,5 @@ Belki yapılacaklar
 * Chat User Icon - stars for player lvl
 * Chat User List için
 * Rejoin - belki - ip den tutulabilir
+* Security
+*** Data aktarımı url get parameter ile yapılıyor. Kolayca degistirilebilir. Serverda var mı yok mu kontrolü yapılabilir. (SOCKET_LIST icinde var mı kontrolü - degerleri tutuyor mu - tutmuyorsa degistirse de eski haline getir linki gibi)

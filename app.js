@@ -24,57 +24,55 @@ app.get("/post", function(req, res) {
 
 app.use('/client',express.static(__dirname + '/client'));
  
-//TODO: Olmazsa aç
 serv.listen(process.env.PORT || 3000);
-//app.set('port', (process.env.PORT || 3000));
 
 require('./client/js/controller/playerController');
+require('./client/js/model/gameObject');
 
 console.log('Server started!');
  
 var SOCKET_LIST = {}; //keeps everyone who is joined by entering username
-var PLAYER_LIST = {}; //TODO: refactor - baska dosyalara al
+var PLAYER_LIST = {}; //TODO: refactor - baska dosyalara al -> hos degil - refactor gerekcek
 var BOMB_LIST = {}; //TODO: refactor - baska dosyalara al
+var GAME_LIST = {};
 var GENERAL_ROOM_NAME = 'general_room'; //TODO: refactor - constant baska dosyalara al - require yapılabilir constant dosyası
 
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
 
-	var username;
 	/////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////CHAT RELATED STARTS//////////////////////////////////////
-	socket.on('new-message', function(data) {
-		console.log(data.username);
-		console.log(data.message);
+	socket.on('newMessage', function(data) { 
+		console.log(data.currentRoom);
 
-		console.log(socket._username);
-		console.log(socket._userIcon);
-		console.log(socket.username);
-		console.log(username);
+
+		io.in(data.currentRoom).emit('chatMessage', data);
 	});
-	
 
-	/////////////////////////////////CHAT RELATED ENDS///////////////////////////////////////
+	socket.on('joinRoom', function(roomName) {
+		socket.join(roomName);
+	});
+	/////////////////////////////////CHAT RELATED ENDS////////////////////////////////s///////
 	/////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 	/////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////JOINING AS A USER STARTS////////////////////////////////////
 	socket.on('enterAsAUser', function(user) {
-		username = user.username;
-		console.log(username);
 		var id = Math.random();
 		var roomName = GENERAL_ROOM_NAME;
+
+		//Bunlar ise yaramiyor - bunlara güvenme - START
 		socket._id = id;
 		socket._username = user.username;
 		socket._userIcon = user.userIcon;
-		socket._currentRoomName = roomName;
+		socket._currentRoomName = 'general_room';
+		//Bunlar ise yaramiyor - bunlara güvenme - END
 		SOCKET_LIST[id] = socket;
 
-		socket.join(GENERAL_ROOM_NAME); //Enter to general_room
+		/*socket.join(GENERAL_ROOM_NAME);*/ //Enter to general_room
 
-		var sendBackData = {userId: id, currentRoomName: roomName};
+		var sendBackData = {userId: id, currentRoomName: 'general_room'};
 
 		socket.emit('sendBackUserId', sendBackData);
 
@@ -85,6 +83,26 @@ io.sockets.on('connection', function(socket){
 		refreshGeneralRoomUserList();
 	});
 	///////////////////////////////JOINING AS A USER ENDS////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////CREATE A GAME START///////////////////////////////////////
+	socket.on('createAGameRoom', function(gameObject) {
+		var id = Math.random();
+		gameObject.id = id;
+		GAME_LIST[id] = gameObject;
+
+		socket.emit('creatorJoinsToGameRoom', gameObject);
+
+		console.log(socket);
+		//TODO: send to clients in general_room a game created
+		//Nedense alttaki calismadi
+		/*socket.broadcast.to(GENERAL_ROOM_NAME).emit('aGameCreated', GAME_LIST);*/
+		//io.in(GENERAL_ROOM_NAME).emit('aGameCreated', GAME_LIST);
+		io.sockets.in(GENERAL_ROOM_NAME).emit('aGameCreated', GAME_LIST);
+	});
+	///////////////////////////////CREATE A GAME END/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -102,7 +120,6 @@ io.sockets.on('connection', function(socket){
 	socket.on('generateMaze', function () {
 		init();
 		loop();
-		
 	});
 
 	var player = null;
@@ -148,7 +165,7 @@ io.sockets.on('connection', function(socket){
     });
 
     socket.on('disconnect',function(){
-    	console.log('Next page?');
+    	//console.log('Next page?'); - yeap sayfa refreshinde de calısıyor :()
 
     	if (player) {
 			/*delete SOCKET_LIST[player.id];*/
