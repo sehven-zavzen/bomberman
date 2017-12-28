@@ -155,6 +155,8 @@ function enterToCreateJoinListRoom() {
         userId = data.userId;
         currentRoom = data.currentRoomName;
 
+        //TODO: gerek yok buna sadece linke user id koy, serverdan o id ile
+
         var link = 'joinCreateListRoom';
         link = link + '?n=' + username;
         link = link + '&i=' +  getGoodSizeOfIcon(currentIcon, 'medium');

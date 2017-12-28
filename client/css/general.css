@@ -209,6 +209,10 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
 }
 
+.hideThis {
+	display: none;
+}
+
 /*Modal Popup START*//*Modal Popup START*//*Modal Popup START*//*Modal Popup START*/
 /*Modal Popup START*//*Modal Popup START*//*Modal Popup START*//*Modal Popup START*/
 /* The Modal (background) */

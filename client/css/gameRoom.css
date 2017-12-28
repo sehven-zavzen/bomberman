@@ -1,0 +1,92 @@
+.Background {
+	background-color: #f9f2d4;
+}
+
+.AllContainer {
+	display: block;
+	border: 3px solid #4f4e49;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+	padding: 10px;
+	width: 800px;
+	height: 750px;
+}
+
+.TopContainer {
+	display: block;
+	/*border: 2px solid #4f4e49;*/
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+	height: 240px;
+}
+
+.MiddleContainer {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	height: 100px;
+}
+
+.BottomContainer {
+	display: block;
+	border: 2px solid #ff783d;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+	height: 300px;
+}
+
+.UserContainer {
+	display: block;
+	border: 2px solid #ff783d;
+	margin: 3px;
+	float: left;
+	width: 43%;
+	height: 94%;
+}
+
+.GameProperties {
+	display: block;
+	border: 2px solid #ff783d;
+	margin: 3px;
+	float: right;
+	width: 54%;
+	height: 94%;
+}
+
+.Label {
+	font-size: 140%;
+	font-weight: bold;
+	color: #b7382a;
+}
+
+.ReadyButton {
+
+}
+
+.ReadyButton:hover {
+    opacity: 0.7;
+}
+
+.ExitButton {
+	display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 140%;
+    font-weight: bold;
+    width: 320px;
+    margin: 4px;
+    float: right;
+}
+
+.ExitButton:hover {
+    opacity: 0.7;
+}

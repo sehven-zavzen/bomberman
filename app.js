@@ -95,13 +95,23 @@ io.sockets.on('connection', function(socket){
 
 		socket.emit('creatorJoinsToGameRoom', gameObject);
 
-		console.log(socket);
 		//TODO: send to clients in general_room a game created
 		//Nedense alttaki calismadi
 		/*socket.broadcast.to(GENERAL_ROOM_NAME).emit('aGameCreated', GAME_LIST);*/
 		//io.in(GENERAL_ROOM_NAME).emit('aGameCreated', GAME_LIST);
-		io.sockets.in(GENERAL_ROOM_NAME).emit('aGameCreated', GAME_LIST);
+		io.sockets.emit('refreshGameList', GAME_LIST);
 	});
+
+	socket.on('requestToGetGameList', function() {
+		io.sockets.emit('refreshGameList', GAME_LIST);
+	});
+
+	socket.on('requestGameInfo', function(id) {
+		socket.emit('responseGameInfo', GAME_LIST[id]);
+	});
+
+	
+
 	///////////////////////////////CREATE A GAME END/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////
 

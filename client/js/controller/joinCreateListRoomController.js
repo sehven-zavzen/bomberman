@@ -11,7 +11,10 @@ $(window).on('load', function(){
  	gameName = $("#gameName");
 
 	socket.emit('requestToGetGeneralRoomUserList');
+	socket.emit('requestToGetGameList');
 
+	//PARSE URL
+	//TODO: gerek yok buna sadece linke user id koy, serverdan o id ile
 	var params = get_params(location.search);
 	var userIcon = params['i'];
 	var currentRoom = params['r'];
@@ -66,12 +69,11 @@ socket.on('refreshGeneralRoomUserList', function(userList) {
 		}
 	}
 		
-	console.log(userList);
-
+	console.log(userList)
 });
 
-socket.on('aGameCreated', function(gList) {
-	//TODO: refresh game list
+socket.on('refreshGameList', function(gList) {
+
 	for (var i in gList) {
 		var game = gList[i];
 
@@ -82,6 +84,7 @@ socket.on('aGameCreated', function(gList) {
 	    var roomName = row.insertCell(2);
 	    var playerCount = row.insertCell(3);
 	    id.innerHTML = game.id;
+	    id.className = "hideThis";
 	    creator.innerHTML = game.creatorName;
 	    creator.className = "CJLTableCell";
 	    roomName.innerHTML = game.gameName;
@@ -137,14 +140,9 @@ function createGame() {
 	socket.emit('createAGameRoom', gameObject);
 
 	socket.on('creatorJoinsToGameRoom', function(gameObject) {
-		//TODO: create url - game id şu bu
-		console.log(gameObject.id);
-		window.open('gameRoom', '_self');
+		window.open('gameRoom?id=' + gameObject.id, '_self');
 	});
 }
-
-
-
 
 $(document).ready(function() {
 	$('#gameList tr').dblclick(function() {

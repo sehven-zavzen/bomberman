@@ -3,11 +3,66 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="./client/css/gameRoom.css">
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script src="./client/js/util/util.js"></script>
+	<script src="./client/js/model/gameObject.js"></script>
 	<script src="./client/js/controller/gameRoomController.js"></script>
+
 </head>
-<body>
-	Tamam kurdun
+<body class="Background">
+	<div class="AllContainer">
+		<label id="lblGameName" class="Label"> Game Name: </label>
+		<div class="TopContainer">
+			<div class="UserContainer">
+			
+			</div>
+			<div class="GameProperties">
+			
+			</div>
+		</div>
+
+		<div class="MiddleContainer">
+			<img id="readyButton" src="/client/img/notReadyLamp.png" class="ReadyButton" onclick="setReady()" />
+		</div>
+
+		<div class="BottomContainer">
+		
+		</div>
+		<button onclick="" class="ExitButton"> EXIT </button>
+
+
+		<!-- <div class="CJLTopButtonsContainer">
+			<button onclick="openGameNameModal()" class="CJLTopButton">Create Game</button>
+			<button onclick="" class="CJLTopButton">Join Game</button>	
+		</div>
+		
+		<label class="CJLLabel"> Game List </label>
+		<div class="CJLGameListContainer">
+			<table id="gameList" class="CJLTable">
+			  <tr>
+			  	<td style="display: none;"> Id </td>
+			    <td class="CJLTableHeaderCell" style="width: 280px"> Creator </td> Player Icon + Player Name
+			    <td class="CJLTableHeaderCell" style="width: 380px"> Room Name </td>
+			    <td class="CJLTableHeaderCell"> In Room </td>
+			  </tr>
+			</table>
+		</div>
+
+		<label class="CJLLabel"> General Chat Room </label>
+		<div class="CJLGeneralChatRoom">
+			<div class="CJLChatLeftPart">
+				<div id="chatMessagesArea" class="CJLChatMessageTextArea"></div>
+				<textarea id="chatInput" class="CJLChatMessageInputArea"></textarea>
+			</div>
+			<div class="CJLChatRightPart">
+				<label class="CJLLabel"> User List </label>
+				<select id="userList" multiple="multiple" class="CJLChatUserListArea">
+				</select>
+			</div>
+		</div> -->
+	</div>
 </body>
 </html>

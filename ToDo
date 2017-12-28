@@ -87,7 +87,7 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 ** make a GAME_LIST in app.js - done
 ** Create Game Object like Player, Bomb - Game Object includes -> Game Id, Game Properties (Bomb power, Bomb count, No undestructible walls) - done
 ** Put Game Object to GAME_LIST - done
-** Server broadcasts a game created or sends back whole GAME_LIST to clients in "general_room"
+** Server broadcasts a game created or sends back whole GAME_LIST to clients in "general_room" -> gameRoomController onload içerisinde - olmadı
 * Double click on a game list row or click a row and press JOIN button
 ** Emit player joined a game to server (with game id and user id)
 ** Redirects new player to game page
@@ -95,12 +95,21 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 * Create Game function - game-room page (includes chat - Care To Chat Room (Test it), game properties (bomb power, start bomb count), Show joined players, Ready buttons) - devam
 *** Simple page sadece yazı iceren
 
+28.12.2017
+----------
+* Server broadcasts a game created or sends back whole GAME_LIST to all clients - done
+* Call refresh game list - createJoinListRoomController onLoad page - done
+* Build game page link, get game info gameRoomController onLoad page - done
+* Design game room page
+
 http://www.mredkj.com/tutorials/tutorial005.html
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
 https://socket.io/docs/rooms-and-namespaces/
 
 
 Sonra yapılacaklar
+* OLMADI: YENI YARATILAN GAME sadece "general_room" odasındakilere gönderilsin :OLMADI chatte oldu gibi ama burda kesin olmadı
+* Password to Create Game popup
 * Game headerına bastığında birsey yapmamalı - ya da belki sadece sıralama 
 * Unique oda isimleri - varsa aynı isimli bir game ve listede yoksa game list refreshlenebilir
 * Oyunu kuran çıkıp, girebilmeli mi? Belki herkes çıkarsa oyun iptal olabilir? 
@@ -150,3 +159,9 @@ Belki yapılacaklar
 * Rejoin - belki - ip den tutulabilir
 * Security
 *** Data aktarımı url get parameter ile yapılıyor. Kolayca degistirilebilir. Serverda var mı yok mu kontrolü yapılabilir. (SOCKET_LIST icinde var mı kontrolü - degerleri tutuyor mu - tutmuyorsa degistirse de eski haline getir linki gibi)
+
+
+
+Sorun çıkaracaklar
+* Server broadcasts a game created or sends back whole GAME_LIST to clients in "general_room" -> gameRoomController onload içerisinde 
+** sayfa refreshinde, ileri geri yapıldığında game list kontrol
