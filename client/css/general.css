@@ -6,8 +6,7 @@
 }
 
 /*
-	Create - Join - List Room -> CJL Room
-	
+	Create - Join - List Room -> CJL Room	
 */
 .CJLBackground {
 	background-color: #f9f2d4;
@@ -138,7 +137,7 @@
 
 .CJLChatMessageTextArea {
 	background-color: #f7fcf8;
-	margin: 1px;
+	margin: 4px;
 	width: 98%;
 	height: 70%;
 	overflow-y: scroll;
@@ -151,7 +150,7 @@
 	background-color: #f7fcf8;
 	margin: 5px;
 	width: 96%;
-	height: 18%;
+	height: 20%;
 	overflow-y: scroll;
 	overflow-x: hidden;
 	resize: none;

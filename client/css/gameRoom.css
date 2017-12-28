@@ -22,6 +22,13 @@
 	height: 240px;
 }
 
+.UserListArea {
+	background-color: #f7fcf8;
+	width: 99%;
+	height: 99%;
+	margin: 2px;
+}
+
 .MiddleContainer {
 	display: block;
 	margin-left: auto;

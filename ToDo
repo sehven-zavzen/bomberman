@@ -93,18 +93,17 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 ** Redirects new player to game page
 ** ..............
 * Create Game function - game-room page (includes chat - Care To Chat Room (Test it), game properties (bomb power, start bomb count), Show joined players, Ready buttons) - devam
-*** Simple page sadece yazı iceren
+*** Simple page sadece yazı iceren - done
 
 28.12.2017
 ----------
 * Server broadcasts a game created or sends back whole GAME_LIST to all clients - done
 * Call refresh game list - createJoinListRoomController onLoad page - done
 * Build game page link, get game info gameRoomController onLoad page - done
+* Index.html den ikinci sayfaya geçerken url de sadece generated user idyi kullan, ikinci sayfa loadında serverdan çek - done
 * Design game room page
 
-http://www.mredkj.com/tutorials/tutorial005.html
-https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
-https://socket.io/docs/rooms-and-namespaces/
+
 
 
 Sonra yapılacaklar

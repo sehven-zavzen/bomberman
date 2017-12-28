@@ -11,9 +11,7 @@ self.allDestructible = param.allDestructible;*/
 socket = io();
 
 var gameName, creatorId, creatorName;
-var lblGameName;
-var readyButton;
-var readyBoolean;
+var lblGameName, readyButton, readyBoolean;
 
 $(window).on('load', function(){
 
@@ -24,11 +22,11 @@ $(window).on('load', function(){
 
 	var params = get_params(location.search);
 	var gameId = params['id'];
+	var userId = params['uId'];
 
 	socket.emit('requestGameInfo', gameId);
 
 	socket.on('responseGameInfo', function(gameData) {
-
 		lblGameName.innerHTML = "Game Name: " + gameData.gameName;
 		console.log(gameData.gameName);
 		console.log(gameData.creatorId);

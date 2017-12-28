@@ -1,0 +1,3 @@
+http://www.mredkj.com/tutorials/tutorial005.html
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
+https://socket.io/docs/rooms-and-namespaces/

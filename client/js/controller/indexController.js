@@ -143,9 +143,8 @@ function setCurrentIcon(str) {
 }
 
 function enterToCreateJoinListRoom() {
-
     var userId = 0;
-    var currentRoom = '';
+
     var username = $("#username").val();
     var user = {userIcon: currentIcon, username: username};
 
@@ -153,16 +152,8 @@ function enterToCreateJoinListRoom() {
     
     socket.on('sendBackUserId', function(data) {
         userId = data.userId;
-        currentRoom = data.currentRoomName;
 
-        //TODO: gerek yok buna sadece linke user id koy, serverdan o id ile
-
-        var link = 'joinCreateListRoom';
-        link = link + '?n=' + username;
-        link = link + '&i=' +  getGoodSizeOfIcon(currentIcon, 'medium');
-        link = link + '&id=' + userId;
-        link = link + '&r=' + currentRoom;
-        
+        var link = 'joinCreateListRoom?id=' + userId;
         window.open(link, '_self');
     });
 }

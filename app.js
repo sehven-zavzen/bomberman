@@ -43,9 +43,6 @@ io.sockets.on('connection', function(socket){
 	/////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////CHAT RELATED STARTS//////////////////////////////////////
 	socket.on('newMessage', function(data) { 
-		console.log(data.currentRoom);
-
-
 		io.in(data.currentRoom).emit('chatMessage', data);
 	});
 
@@ -62,21 +59,25 @@ io.sockets.on('connection', function(socket){
 		var id = Math.random();
 		var roomName = GENERAL_ROOM_NAME;
 
-		//Bunlar ise yaramiyor - bunlara güvenme - START
 		socket._id = id;
 		socket._username = user.username;
 		socket._userIcon = user.userIcon;
 		socket._currentRoomName = 'general_room';
-		//Bunlar ise yaramiyor - bunlara güvenme - END
+
 		SOCKET_LIST[id] = socket;
 
-		/*socket.join(GENERAL_ROOM_NAME);*/ //Enter to general_room
-
 		var sendBackData = {userId: id, currentRoomName: 'general_room'};
-
 		socket.emit('sendBackUserId', sendBackData);
 
 		refreshGeneralRoomUserList();
+	});
+
+	socket.on('requestUserInfo', function(id) {
+		var socketInfo = SOCKET_LIST[id];
+
+		var sendBackUserInfo = {userId: id, username: socketInfo._username, userIcon: socketInfo._userIcon, currentRoom: socketInfo._currentRoomName};
+		socket.join(socketInfo._currentRoomName);
+		socket.emit('responseUserInfo', sendBackUserInfo);
 	});
 
 	socket.on('requestToGetGeneralRoomUserList', function() {
@@ -109,9 +110,6 @@ io.sockets.on('connection', function(socket){
 	socket.on('requestGameInfo', function(id) {
 		socket.emit('responseGameInfo', GAME_LIST[id]);
 	});
-
-	
-
 	///////////////////////////////CREATE A GAME END/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////
 
@@ -156,7 +154,7 @@ io.sockets.on('connection', function(socket){
 
 	});
 
-    socket.on('keyPress',function(data){
+    socket.on('keyPress', function(data) {
 	    if(data.inputId === 'left')
 	        player.pressingLeft = data.state;
 	    else if(data.inputId === 'right')
@@ -174,9 +172,7 @@ io.sockets.on('connection', function(socket){
 	        player.showMap = data.state;
     });
 
-    socket.on('disconnect',function(){
-    	//console.log('Next page?'); - yeap sayfa refreshinde de calısıyor :()
-
+    socket.on('disconnect', function() {
     	if (player) {
 			/*delete SOCKET_LIST[player.id];*/
 	        delete PLAYER_LIST[player.id];

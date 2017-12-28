@@ -1,34 +1,26 @@
 socket = io();
 
-var username;
-var userid;
-var gameNameModal;
-var gameName;
+var username, userId, gameNameModal, gameName;
+
 //sayfa yenilendiğinde ve user ilk giriste redirect yaptıgı icin user listi cekiyor
 $(window).on('load', function(){
-
  	gameNameModal = $("#gameNameModal")[0];
  	gameName = $("#gameName");
 
 	socket.emit('requestToGetGeneralRoomUserList');
 	socket.emit('requestToGetGameList');
 
-	//PARSE URL
-	//TODO: gerek yok buna sadece linke user id koy, serverdan o id ile
 	var params = get_params(location.search);
-	var userIcon = params['i'];
-	var currentRoom = params['r'];
-	username = params['n'];
-	userid = params['id'];
+	userId = params['id'];
 
+	socket.emit('requestUserInfo', userId);
 
-	document.getElementById('userIcon').src = '/client/img/playerIcons/' + userIcon;
-	document.getElementById('username').innerHTML = username;
-	document.getElementById('currentRoom').innerHTML = currentRoom;
-
-	//Burda socket join olayını yapmak lazım tekrar :(
-	socket.emit('joinRoom', currentRoom);
-
+	socket.on('responseUserInfo', function(userInfo) {
+		username = userInfo.username;
+		document.getElementById('userIcon').src = '/client/img/playerIcons/' + getGoodSizeOfIcon(userInfo.userIcon, 'medium');
+		document.getElementById('username').innerHTML = userInfo.username;
+		document.getElementById('currentRoom').innerHTML = userInfo.currentRoom;
+	});
 });
 
 //herhangi bir user join yaptığında refresh liste
@@ -79,6 +71,7 @@ socket.on('refreshGameList', function(gList) {
 
 		var table = document.getElementById("gameList");
 	    var row = table.insertRow(table.length);
+	    row.className = 'clickable';
 	    var id = row.insertCell(0);
 	    var creator = row.insertCell(1);
 	    var roomName = row.insertCell(2);
@@ -95,24 +88,8 @@ socket.on('refreshGameList', function(gList) {
 
 });
 
-
-
-
 function openGameNameModal() {
-	// Get the modal
-	//var gameNameModal = document.getElementById('gameNameModal');
-
-
-	// When the user clicks the button, open the modal 
-	//btn.onclick = function() {
-	    gameNameModal.style.display = "block";
-	//}
-
-	// When the user clicks on <span> (x), close the modal
-	
-
-	// When the user clicks anywhere outside of the modal, close it
-	
+    gameNameModal.style.display = "block";	
 }
 
 function closeGameNameModal() {
@@ -133,10 +110,9 @@ function createGame() {
 	gameName.val('');
  	gameNameModal.style.display = "none";
 
- 	var gameData = {gameName: gName, creatorId: userid, creatorName: username};
+ 	var gameData = {gameName: gName, creatorId: userId, creatorName: username};
  	var gameObject = new GAME(gameData);
 
-	//emit to server a game created
 	socket.emit('createAGameRoom', gameObject);
 
 	socket.on('creatorJoinsToGameRoom', function(gameObject) {
@@ -145,22 +121,19 @@ function createGame() {
 }
 
 $(document).ready(function() {
-	$('#gameList tr').dblclick(function() {
-		alert('Hohoy');
+	$('#gameList').on('click', 'tr.clickable', function() {
+	    $(this).addClass('CJLTableRowSelected').siblings().removeClass('CJLTableRowSelected');
+	});
+
+	$('#gameList').on('dblclick', 'tr.clickable', function() { 
+   		var gameId = $(this).find('td:first').html();
+   		joinGame(gameId);
 	});
 });
 
-$(document).ready(function() {
-	$('#gameList').on('click', 'tr', function() {
-	    $(this).addClass('CJLTableRowSelected').siblings().removeClass('CJLTableRowSelected');    
-   		var value = $(this).find('td:first').html();
-   		alert(value);
-	});
-
-	$('#gameList').on('dblclick', 'tr', function() {
-	    alert("JOIN GAME");
-	});
-});
+function joinGame(gameId) {
+	window.open('gameRoom?id=' + gameId+ '&uId=' + userId, '_self');
+}
 
 
 //TODO: sil bunu - cöp
