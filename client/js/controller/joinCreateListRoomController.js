@@ -1,6 +1,6 @@
 socket = io();
 
-var username, userId, gameNameModal, gameName;
+var userObj, username, userId, gameNameModal, gameName;
 
 //sayfa yenilendiğinde ve user ilk giriste redirect yaptıgı icin user listi cekiyor
 $(window).on('load', function(){
@@ -15,7 +15,9 @@ $(window).on('load', function(){
 
 	socket.emit('requestUserInfo', userId);
 
+//TODO: Refactor app.js - just return user obj or player obj
 	socket.on('responseUserInfo', function(userInfo) {
+		userObj = userInfo;
 		username = userInfo.username;
 		document.getElementById('userIcon').src = '/client/img/playerIcons/' + getGoodSizeOfIcon(userInfo.userIcon, 'medium');
 		document.getElementById('username').innerHTML = userInfo.username;
@@ -44,7 +46,7 @@ socket.on('refreshGeneralRoomUserList', function(userList) {
 		if (!boolFind) {
 			var elOptNew = document.createElement('option');
 		    elOptNew.value = user.userId;
-		    elOptNew.innerHTML = '&#127775; ' + user.username; //TODO: yildiz yerine sectigi icon gelseydi iyiydi ama düz select componenti yapamiyormus
+		    elOptNew.innerHTML = '&#127775; ' + user.username; //TODO: yildiz yerine sectigi icon gelseydi iyiydi ama düz select componenti yapamiyormus bu islemi
 		    elOptNew.userIcon = user.userIcon; 
 
 		    if (elSel.length == 0) {
@@ -113,6 +115,8 @@ function createGame() {
  	var gameData = {gameName: gName, creatorId: userId, creatorName: username};
  	var gameObject = new GAME(gameData);
 
+ 	console.log(gameObject);
+ 	
 	socket.emit('createAGameRoom', gameObject);
 
 	socket.on('creatorJoinsToGameRoom', function(gameObject) {

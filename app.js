@@ -60,7 +60,7 @@ io.sockets.on('connection', function(socket){
 		var roomName = GENERAL_ROOM_NAME;
 
 		socket._id = id;
-		socket._username = user.username;
+		socket.username = user.username;
 		socket._userIcon = user.userIcon;
 		socket._currentRoomName = 'general_room';
 
@@ -75,7 +75,7 @@ io.sockets.on('connection', function(socket){
 	socket.on('requestUserInfo', function(id) {
 		var socketInfo = SOCKET_LIST[id];
 
-		var sendBackUserInfo = {userId: id, username: socketInfo._username, userIcon: socketInfo._userIcon, currentRoom: socketInfo._currentRoomName};
+		var sendBackUserInfo = {userId: id, username: socketInfo.username, userIcon: socketInfo._userIcon, currentRoom: socketInfo._currentRoomName};
 		socket.join(socketInfo._currentRoomName);
 		socket.emit('responseUserInfo', sendBackUserInfo);
 	});
@@ -92,7 +92,9 @@ io.sockets.on('connection', function(socket){
 	socket.on('createAGameRoom', function(gameObject) {
 		var id = Math.random();
 		gameObject.id = id;
-		GAME_LIST[id] = gameObject;
+		//TODO: create GAME object here to use functions
+		var game = new GAME(gameObject);
+		GAME_LIST[id] = game;
 
 		socket.emit('creatorJoinsToGameRoom', gameObject);
 
@@ -107,9 +109,29 @@ io.sockets.on('connection', function(socket){
 		io.sockets.emit('refreshGameList', GAME_LIST);
 	});
 
-	socket.on('requestGameInfo', function(id) {
-		socket.emit('responseGameInfo', GAME_LIST[id]);
+	socket.on('joinAndRequestGameInfo', function(data) {
+		var userId = data.userId;
+		var game = GAME_LIST[data.gameId];
+
+		/*console.log(game);*/
+		
+		if (data.userId == undefined) {
+			userId = game.creatorId;
+		}
+
+		var user = SOCKET_LIST[userId];
+		console.log
+		var userObj = {id: userId, username: user.username}; //TODO: refactor user object - player object
+
+		game.someoneJoined(userObj);
+		GAME_LIST[game.id] = game;
+
+		io.sockets.emit('responseGameInfo', GAME_LIST[game.id]);
 	});
+
+	/*socket.on('requestUsersInGame', function(game) {
+
+	});*/
 	///////////////////////////////CREATE A GAME END/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////
 
@@ -229,7 +251,7 @@ function refreshGeneralRoomUserList() {
 	var userList = {};
 	for (var i in SOCKET_LIST) {
 		var userId = SOCKET_LIST[i]._id;
-		var user = {userId: userId, userIcon: SOCKET_LIST[i]._userIcon, username: SOCKET_LIST[i]._username, currentRoomName: SOCKET_LIST[i]._currentRoomName};
+		var user = {userId: userId, userIcon: SOCKET_LIST[i]._userIcon, username: SOCKET_LIST[i].username, currentRoomName: SOCKET_LIST[i]._currentRoomName};
 		userList[userId] = user;
 	}
 

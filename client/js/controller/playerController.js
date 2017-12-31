@@ -39,7 +39,7 @@ Player = function(param) {
 
 	self.getColor = function() {
 		return self.color; 
-	};
+	}
 
 	self.getMapPositionX = function() {
 		return self.mapPositionX;

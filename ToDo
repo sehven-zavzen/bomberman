@@ -101,10 +101,12 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 * Call refresh game list - createJoinListRoomController onLoad page - done
 * Build game page link, get game info gameRoomController onLoad page - done
 * Index.html den ikinci sayfaya geçerken url de sadece generated user idyi kullan, ikinci sayfa loadında serverdan çek - done
-* Design game room page
+* Design game room page - half done
 
-
-
+29.12.2017
+----------
+* Design game room page - devam
+* Game room someone joined user list
 
 Sonra yapılacaklar
 * OLMADI: YENI YARATILAN GAME sadece "general_room" odasındakilere gönderilsin :OLMADI chatte oldu gibi ama burda kesin olmadı

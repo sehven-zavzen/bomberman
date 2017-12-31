@@ -8,6 +8,19 @@ GAME = function(param) {
 	self.bombPower = param.bombPower;
 	self.bombCount = param.bombCount;
 	self.allDestructible = param.allDestructible;
+	self.playerCount = 0; //Gerek yok alma kalsın
+	self.playersInGame = {};
+
+	self.someoneJoined = function(player) {
+		self.playerCount++;
+		self.playersInGame[player.id] = player;
+	}
+
+	self.someoneLeft = function(player) {
+		self.playerCount--;
+		var playerId = player.id;
+		delete self.playersInGame.playerId;
+	}
 
 	return self;
 }

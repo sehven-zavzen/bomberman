@@ -97,3 +97,18 @@
 .ExitButton:hover {
     opacity: 0.7;
 }
+
+.hideThis {
+	display: none;
+}
+
+.UserTable {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.UserTableCell {
+	border: 1px solid black;
+    padding: 4px;
+    font-size: 110%;
+}
