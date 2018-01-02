@@ -146,7 +146,14 @@ function enterToCreateJoinListRoom() {
     var userId = 0;
 
     var username = $("#username").val();
+
+    if (!validateUsername(username)) {
+        return;
+    }
+
+
     var user = {userIcon: currentIcon, username: username};
+    $("#username").val('');
 
     socket.emit('enterAsAUser', user);
     
@@ -158,3 +165,30 @@ function enterToCreateJoinListRoom() {
     });
 }
 
+document.onkeydown = function(event) {
+    if (event.which === 13) {
+        event.preventDefault();
+        enterToCreateJoinListRoom();
+    }
+}
+
+//TODO: ilerde register - login - db geldiğinde check et
+//TODO: simdilik username is empty - username.length > 3  ve  SOCKET_LIST te var mı kontrol et
+function validateUsername(username) {
+    var validate = true;
+    var name = username.trim();
+
+    if (name == '') {
+        alert("Username can't be empty!");
+        validate = false;
+    } else {
+        if (name.length < 3) {
+            alert("Username length should be longer than 2 characters!");
+            validate = false;
+        } else {
+            //TODO: check if exist in SOCKET_LIST
+        }
+    }
+
+    return validate;
+}

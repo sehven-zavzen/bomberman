@@ -121,35 +121,45 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 01.01.2018
 ----------
 * Join Button - done
-* Ampul - ready not ready - send signal to everyone in that room
+
+02.01.2018
+----------
+* Game headerına bastığında birsey yapmamalı - done
+-- socket.on ifadesini document.ready içinde yazmak çözüyor - örnek gameRoomController.js -> ready ile ilgili kısım - done
+* OLMADI: YENI YARATILAN GAME sadece "general_room" odasındakilere gönderilsin :OLMADI chatte oldu gibi ama burda kesin olmadı - üstteki gibi yap - done
+* JOIN için Enter butonu - done
+* İsim alanını boş bırakır veya o alana 3 karakterden az girer ve join olmaya kalkarsa uyarı ver. - done
+* Ampul - ready not ready - send signal to everyone in that room - done
+** Biri odaya girdiğinde herkesin readysini ayarla
+* Add password column to game list - done
+* Refactor index.html
+* Password to Create Game popup 
+* joinCreateListRoom.html default user icon
+
+
 
 
 
 Sonra yapılacaklar
+* Password implementation
+* set readies and game props for newly joined players
 * Leave from chat - joinCreateListRoom.html page if user leaves the page - jquery unload event
-* Password while creating a game - add column to game list
-* OLMADI: YENI YARATILAN GAME sadece "general_room" odasındakilere gönderilsin :OLMADI chatte oldu gibi ama burda kesin olmadı
-* Password to Create Game popup
-* Game headerına bastığında birsey yapmamalı - ya da belki sadece sıralama 
-* Unique oda isimleri - varsa aynı isimli bir game ve listede yoksa game list refreshlenebilir
+* Unique oda isimleri - varsa aynı isimli bir game ve listede yoksa game list refreshlenebilir   
 * Oyunu kuran çıkıp, girebilmeli mi? Belki herkes çıkarsa oyun iptal olabilir? 
 * Chat-message divi auto scroll
 * Mini map
 * Game list search, order by name, checkbox to don't show full games
 * Cıkan kisi SOCKET_LIST te tutuluyor - onu PLAYER_LIST e cevirmek gerekebilir - JOIN oldugunda eklensin, sayfa degistiginde veya cıktıgında ordan cıksın (refresh hala muamma)
 * socket.io-1.4.5 localden kullanılacak
-* joinCreateListRoom.html default user icon
 * Bomba animasyonu first frame shows after bomb
 * logout olma ya da sayfayı kapama durumunda chat listelerinden sil, SOCKET_LIST, PLAYER_LIST ten sil
 * aynı isimli userlar login olamasın - register, login belki ya da generate username
 * bomba spritenın backgroundı var
 * Spectate mode ? :D
 * Refactor animation files
-* Join için Enter butonu
 * Bir süre sonra bomba gücü otomatikte artabilir, herkes için
 * Oyun alanı bir süre sonra daralacak - Eren
 * Icon kısmı yuvarlak olsun - https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form
-* İsim girmezse JOIN disable olmalı
 * Oyun başladığında bu sensin oku çıkabilir
 * Eğer socket.name yoksa bomberman.html ye geçmeyebilir, tekrar index.html ye yönlendirebilir
 * Bombayı bıraktığında playerın görüntüsü bir garip oluyor - player üstüne çizilen bomba animasyonu 

@@ -42,7 +42,7 @@ io.sockets.on('connection', function(socket){
 
 	/////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////CHAT RELATED STARTS//////////////////////////////////////
-	socket.on('newMessage', function(data) { 
+	socket.on('newMessage', function(data) {
 		io.in(data.currentRoom).emit('chatMessage', data);
 	});
 
@@ -98,11 +98,7 @@ io.sockets.on('connection', function(socket){
 
 		socket.emit('creatorJoinsToGameRoom', gameObject);
 
-		//TODO: send to clients in general_room a game created
-		//Nedense alttaki calismadi
-		/*socket.broadcast.to(GENERAL_ROOM_NAME).emit('aGameCreated', GAME_LIST);*/
-		//io.in(GENERAL_ROOM_NAME).emit('aGameCreated', GAME_LIST);
-		io.sockets.emit('refreshGameList', GAME_LIST);
+		io.in(GENERAL_ROOM_NAME).emit('refreshGameList', GAME_LIST);
 	});
 
 	socket.on('requestToGetGameList', function() {
@@ -112,8 +108,6 @@ io.sockets.on('connection', function(socket){
 	socket.on('joinAndRequestGameInfo', function(data) {
 		var userId = data.userId;
 		var game = GAME_LIST[data.gameId];
-
-		/*console.log(game);*/
 		
 		if (data.userId == undefined) {
 			userId = game.creatorId;
@@ -126,14 +120,13 @@ io.sockets.on('connection', function(socket){
 		game.someoneJoined(userObj);
 		GAME_LIST[game.id] = game;
 
-		/*console.log(game);*/
-
 		io.sockets.emit('responseGameInfo', game);
 	});
 
-	/*socket.on('requestUsersInGame', function(game) {
+	socket.on('sendReadyValue', function(data) {
+		io.in(data.gameName).emit('responseReadyValue', data);
+	});
 
-	});*/
 	///////////////////////////////CREATE A GAME END/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////
 
@@ -205,9 +198,6 @@ io.sockets.on('connection', function(socket){
 	//////////////////////////////////GAME RELATED ENDS//////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////
 
-
-    
-   
 });
 
 setInterval(function(){

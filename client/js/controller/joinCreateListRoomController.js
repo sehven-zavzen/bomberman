@@ -32,7 +32,7 @@ socket.on('refreshGeneralRoomUserList', function(userList) {
 	for (var i in userList) {
 		user = userList[i]; 
 
-		//TODO: Could be perfomance issues, ilerde düzeltilebilir
+		//TODO: Could be perfomance issues, ilerde düzeltilebilir - liste temizlenip tekrar yaz
 		var item, boolFind = false;
 
 		for(var j = 0; j < elSel.length; j++) {
@@ -66,29 +66,35 @@ socket.on('refreshGeneralRoomUserList', function(userList) {
 	console.log(userList)
 });
 
-socket.on('refreshGameList', function(gList) {
+$(document).ready(function() {
+	socket.on('refreshGameList', function(gList) {
 
-	for (var i in gList) {
-		var game = gList[i];
+		for (var i in gList) {
+			var game = gList[i];
 
-		var table = document.getElementById("gameList");
-	    var row = table.insertRow(table.length);
-	    row.className = 'clickable';
-	    var id = row.insertCell(0);
-	    var creator = row.insertCell(1);
-	    var roomName = row.insertCell(2);
-	    var playerCount = row.insertCell(3);
-	    id.innerHTML = game.id;
-	    id.className = "hideThis";
-	    creator.innerHTML = game.creatorName;
-	    creator.className = "CJLTableCell";
-	    roomName.innerHTML = game.gameName;
-	    roomName.className = "CJLTableCell";
-	    playerCount.innerHTML = "1/5"; //TODO: join roomlarda update edilecek cell
-	    playerCount.className = "CJLTableCell";
-	}
+			var table = document.getElementById("gameList");
+		    var row = table.insertRow(table.length);
+		    row.className = 'clickable';
+		    var id = row.insertCell(0);
+		    var creator = row.insertCell(1);
+		    var roomName = row.insertCell(2);
+		    var playerCount = row.insertCell(3);
+		    var password = row.insertCell(4);
+		    id.innerHTML = game.id;
+		    id.className = "hideThis";
+		    creator.innerHTML = game.creatorName;
+		    creator.className = "CJLTableCell";
+		    roomName.innerHTML = game.gameName;
+		    roomName.className = "CJLTableCell";
+		    playerCount.innerHTML = "1/5"; //TODO: join roomlarda update edilecek cell
+		    playerCount.className = "CJLTableCell";
+		    password.className = "CJLTableCell";
+		}
 
+	});
 });
+
+
 
 function openGameNameModal() {
     gameNameModal.style.display = "block";	
