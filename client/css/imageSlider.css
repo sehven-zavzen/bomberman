@@ -12,12 +12,13 @@
 }
 
 #slideshow ul{
-    height:320px;
-    left:25px;
+    height:170px;
+    top: 15px;
+    left:45px;
     list-style:none outside none;
     overflow:hidden;
     position:absolute;
-    width:620px;
+    width:170px;
 }
 
 #slideshow li{

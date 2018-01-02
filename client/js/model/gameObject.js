@@ -8,10 +8,16 @@ GAME = function(param) {
 	self.bombPower = param.bombPower;
 	self.bombCount = param.bombCount;
 	self.allDestructible = param.allDestructible;
-	self.playerCount = 0; //Gerek yok alma kalsın
-	self.playersInGame = {};
+
+	if (param.playersInGame != undefined) {
+		self.playersInGame = param.playersInGame;
+	}
+	
+	/*self.playerCount = self.playersInGame.size //sonra*/
 
 	self.someoneJoined = function(player) {
+		console.log(self.playersInGame);
+
 		self.playerCount++;
 		self.playersInGame[player.id] = player;
 	}
@@ -20,6 +26,10 @@ GAME = function(param) {
 		self.playerCount--;
 		var playerId = player.id;
 		delete self.playersInGame.playerId;
+	}
+
+	self.getPlayerName = function(playerId) {
+		return self.playersInGame[playerId].username;
 	}
 
 	return self;

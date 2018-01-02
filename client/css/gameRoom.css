@@ -103,12 +103,47 @@
 }
 
 .UserTable {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 100%;
 }
 
 .UserTableCell {
-	border: 1px solid black;
-    padding: 4px;
+	/*border: 1px solid black;
+    padding: 4px;*/
+    padding: 1px;
     font-size: 110%;
+}
+
+.UserTableImgCell {
+	/*border: 1px solid black;
+    padding: 4px;*/
+    padding: 1px 1px 0px 1px;
+    width: 38px;
+}
+
+.UserTableImg {
+	width: 35px;
+	height: 35px;
+}
+
+.ChatMessageTextArea {
+	background-color: #f7fcf8;
+	margin: 4px;
+	width: 98%;
+	height: 72%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	resize: none;
+	word-wrap: break-word;
+}
+
+.ChatMessageInputArea {
+	background-color: #f7fcf8;
+	margin: 4px;
+	width: 98%;
+	height: 20%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	resize: none;
+	word-wrap: break-word;
 }

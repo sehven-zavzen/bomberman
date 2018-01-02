@@ -106,9 +106,28 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 29.12.2017
 ----------
 * Design game room page - devam
-* Game room someone joined user list
+* Game room someone joined user list - start
+
+30.12.2017
+----------
+* Game room someone joined user list - done
+* Chat for game room
+** Create simple chat implementation - done
+** Needs to change joined players room to game name - done
+* Design user list in game room
+** Lamp - Icon - Player Name - done
+* Use only big icons with appropriate sizes
+
+01.01.2018
+----------
+* Join Button - done
+* Ampul - ready not ready - send signal to everyone in that room
+
+
 
 Sonra yapılacaklar
+* Leave from chat - joinCreateListRoom.html page if user leaves the page - jquery unload event
+* Password while creating a game - add column to game list
 * OLMADI: YENI YARATILAN GAME sadece "general_room" odasındakilere gönderilsin :OLMADI chatte oldu gibi ama burda kesin olmadı
 * Password to Create Game popup
 * Game headerına bastığında birsey yapmamalı - ya da belki sadece sıralama 

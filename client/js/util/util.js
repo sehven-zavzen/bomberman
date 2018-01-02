@@ -33,7 +33,10 @@ Object.size = function(obj) {
     document.body.removeChild(form);
 }*/
 
-
+function setPageProps(username, roomname) {
+    document.getElementById('username').innerHTML = username;
+    document.getElementById('currentRoom').innerHTML = roomname;
+}
 
 //Resimde sadece tek alttan cizgi olmalı
 function getGoodSizeOfIcon(str, size) {

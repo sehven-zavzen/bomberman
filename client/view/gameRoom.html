@@ -10,9 +10,12 @@
 	<script src="./client/js/util/util.js"></script>
 	<script src="./client/js/model/gameObject.js"></script>
 	<script src="./client/js/controller/gameRoomController.js"></script>
+	<script src="./client/js/controller/chatController.js"></script>
 
 </head>
 <body class="Background">
+	<label id="currentRoom" hidden></label>
+	<label id="username" hidden></label>
 	<div class="AllContainer">
 		<label id="lblGameName" class="Label"> Game Name: </label>
 		<div class="TopContainer">
@@ -37,7 +40,8 @@
 		</div>
 
 		<div class="BottomContainer">
-		
+			<div id="chatMessagesArea" class="ChatMessageTextArea"></div>
+			<textarea id="chatInput" class="ChatMessageInputArea"></textarea>
 		</div>
 		<button onclick="" class="ExitButton"> EXIT </button>
 

@@ -61,7 +61,7 @@ io.sockets.on('connection', function(socket){
 
 		socket._id = id;
 		socket.username = user.username;
-		socket._userIcon = user.userIcon;
+		socket.userIcon = user.userIcon;
 		socket._currentRoomName = 'general_room';
 
 		SOCKET_LIST[id] = socket;
@@ -75,7 +75,7 @@ io.sockets.on('connection', function(socket){
 	socket.on('requestUserInfo', function(id) {
 		var socketInfo = SOCKET_LIST[id];
 
-		var sendBackUserInfo = {userId: id, username: socketInfo.username, userIcon: socketInfo._userIcon, currentRoom: socketInfo._currentRoomName};
+		var sendBackUserInfo = {userId: id, username: socketInfo.username, userIcon: socketInfo.userIcon, currentRoom: socketInfo._currentRoomName};
 		socket.join(socketInfo._currentRoomName);
 		socket.emit('responseUserInfo', sendBackUserInfo);
 	});
@@ -92,7 +92,7 @@ io.sockets.on('connection', function(socket){
 	socket.on('createAGameRoom', function(gameObject) {
 		var id = Math.random();
 		gameObject.id = id;
-		//TODO: create GAME object here to use functions
+		
 		var game = new GAME(gameObject);
 		GAME_LIST[id] = game;
 
@@ -120,13 +120,15 @@ io.sockets.on('connection', function(socket){
 		}
 
 		var user = SOCKET_LIST[userId];
-		console.log
-		var userObj = {id: userId, username: user.username}; //TODO: refactor user object - player object
+
+		var userObj = {id: userId, username: user.username, userIcon: user.userIcon}; //TODO: refactor user object veya player object
 
 		game.someoneJoined(userObj);
 		GAME_LIST[game.id] = game;
 
-		io.sockets.emit('responseGameInfo', GAME_LIST[game.id]);
+		/*console.log(game);*/
+
+		io.sockets.emit('responseGameInfo', game);
 	});
 
 	/*socket.on('requestUsersInGame', function(game) {
@@ -251,7 +253,7 @@ function refreshGeneralRoomUserList() {
 	var userList = {};
 	for (var i in SOCKET_LIST) {
 		var userId = SOCKET_LIST[i]._id;
-		var user = {userId: userId, userIcon: SOCKET_LIST[i]._userIcon, username: SOCKET_LIST[i].username, currentRoomName: SOCKET_LIST[i]._currentRoomName};
+		var user = {userId: userId, userIcon: SOCKET_LIST[i].userIcon, username: SOCKET_LIST[i].username, currentRoomName: SOCKET_LIST[i]._currentRoomName};
 		userList[userId] = user;
 	}
 

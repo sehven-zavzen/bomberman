@@ -19,9 +19,9 @@ $(window).on('load', function(){
 	socket.on('responseUserInfo', function(userInfo) {
 		userObj = userInfo;
 		username = userInfo.username;
-		document.getElementById('userIcon').src = '/client/img/playerIcons/' + getGoodSizeOfIcon(userInfo.userIcon, 'medium');
-		document.getElementById('username').innerHTML = userInfo.username;
-		document.getElementById('currentRoom').innerHTML = userInfo.currentRoom;
+		document.getElementById('userIcon').src = '/client/img/playerIcons/' + userInfo.userIcon;
+
+		setPageProps(userInfo.username, userInfo.currentRoom);
 	});
 });
 
@@ -112,10 +112,10 @@ function createGame() {
 	gameName.val('');
  	gameNameModal.style.display = "none";
 
- 	var gameData = {gameName: gName, creatorId: userId, creatorName: username};
+ 	var gameData = {gameName: gName, creatorId: userId, creatorName: username, playersInGame: {}};
  	var gameObject = new GAME(gameData);
 
- 	console.log(gameObject);
+ 	/*console.log(gameObject);*/
  	
 	socket.emit('createAGameRoom', gameObject);
 
@@ -124,21 +124,31 @@ function createGame() {
 	});
 }
 
+var selectedGameId = null;
+
 $(document).ready(function() {
 	$('#gameList').on('click', 'tr.clickable', function() {
 	    $(this).addClass('CJLTableRowSelected').siblings().removeClass('CJLTableRowSelected');
+	    selectedGameId = $(this).find('td:first').html();
 	});
 
 	$('#gameList').on('dblclick', 'tr.clickable', function() { 
-   		var gameId = $(this).find('td:first').html();
-   		joinGame(gameId);
+   		var selectedGameId = $(this).find('td:first').html();
+   		joinGame(selectedGameId);
 	});
 });
 
 function joinGame(gameId) {
-	window.open('gameRoom?id=' + gameId+ '&uId=' + userId, '_self');
+	window.open('gameRoom?id=' + gameId + '&uId=' + userId, '_self');
 }
 
+function joinGameButtonEvent() {
+	//TODO: check game still exist in list - can joinable ?
+	if (selectedGameId != null) {
+		window.open('gameRoom?id=' + selectedGameId + '&uId=' + userId, '_self');
+	}
+	
+}
 
 //TODO: sil bunu - cöp
 function geriGit() {
