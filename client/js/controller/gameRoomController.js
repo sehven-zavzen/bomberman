@@ -1,13 +1,14 @@
 var socket = io();
 
 var gameId, gameName, creatorId, creatorName;
-var lblGameName, readyButton, readyBoolean;
+var lblGameName, readyButton, readyBoolean, lampLabel;
 var userId;
 
 $(window).on('load', function(){
 
 	lblGameName = $('#lblGameName')[0];
 	readyButton = $('#readyButton')[0];
+	lampLabel = $('#lampLabel');
 
 	readyBoolean = false;
 
@@ -34,6 +35,8 @@ $(window).on('load', function(){
 	
 		refreshUserList(game);
 	});
+
+	moveElementRightAndLeft('lampLabel', 3000, 90, 'forever');
 });
 
 function refreshUserList(game) {
@@ -82,11 +85,16 @@ function refreshUserList(game) {
 function setReady() {
 	if (!readyBoolean) {
 		readyButton.src = '/client/img/readyLamp.png';
-		readyBoolean = true; 
+		readyBoolean = true;
+		stopAnimation('lampLabel');
+		lampLabel.css('margin-left', '');
 	} else {
 		readyButton.src = '/client/img/notReadyLamp.png';
 		readyBoolean = false;
+		moveElementRightAndLeft('lampLabel', 3000, 90, 'forever');
 	}
+
+	hideShowElement('lampLabel', readyBoolean);
 
 	var readyObj = {
 		gameName: gameName,
@@ -118,5 +126,4 @@ $(document).ready(function() {
 	});
 
 });
-
 

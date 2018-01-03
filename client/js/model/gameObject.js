@@ -16,10 +16,12 @@ GAME = function(param) {
 	/*self.playerCount = self.playersInGame.size //sonra*/
 
 	self.someoneJoined = function(player) {
-		console.log(self.playersInGame);
+		/*console.log('before someoneJoined -> ' + self.playersInGame);*/
 
 		self.playerCount++;
 		self.playersInGame[player.id] = player;
+
+		/*console.log('after someoneJoined -> ' + self.playersInGame);*/
 	}
 
 	self.someoneLeft = function(player) {

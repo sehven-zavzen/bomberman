@@ -1,60 +1,48 @@
-
-
 <!DOCTYPE html>
 <html>
-<head>
-	<link rel="stylesheet" type="text/css" href="./client/css/index.css">
-	<link rel="stylesheet" type="text/css" href="./client/css/imageSlider.css">
-	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="./client/js/controller/generalController.js"></script>
-	<script src="./client/js/controller/indexController.js"></script>
-	<script src="./client/js/util/util.js"></script>
-</head>
+	<head>
+		<link rel="stylesheet" type="text/css" href="./client/css/index.css">
+		<link rel="stylesheet" type="text/css" href="./client/css/imageSlider.css">
+		<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="./client/js/controller/generalController.js"></script>
+		<script src="./client/js/controller/indexController.js"></script>
+		<script src="./client/js/util/util.js"></script>
+	</head>
 
+	<body class="background">
+		<div>
+			<div class="bigCenterLabel">
+			  <label><b>Choose an icon</b></label>
+			</div>
+			<div id="slideshow">
+			    <ul class="slides">
+			        <li><img id="big_cat.png" src="/client/img/playerIcons/big_cat.png" /></li>
+			        <li><img id="big_frog.png" src="/client/img/playerIcons/big_frog.png" /></li>
+			        <li><img id="big_hippo.png" src="/client/img/playerIcons/big_hippo.png" /></li>
+			        <li><img id="big_lion.png" src="/client/img/playerIcons/big_lion.png" /></li>
+			        <li><img id="big_mouse.png" src="/client/img/playerIcons/big_mouse.png" /></li>
+			        <li><img id="big_panda.png" src="/client/img/playerIcons/big_panda.png" /></li>
+			        <li><img id="big_panther.png" src="/client/img/playerIcons/big_panther.png" /></li>
+			        <li><img id="big_rabbit.png" src="/client/img/playerIcons/big_rabbit.png" /></li>
+			        <li><img id="big_zebra.png" src="/client/img/playerIcons/big_zebra.png" /></li>
+			        <li><img id="big_turtle1.png" src="/client/img/playerIcons/big_turtle1.png" /></li>
+			        <li><img id="big_turtle2.png" src="/client/img/playerIcons/big_turtle2.png" /></li>
+			        <li><img id="big_turtle3.png" src="/client/img/playerIcons/big_turtle3.png" /></li>
+			        <li><img id="big_turtle4.png" src="/client/img/playerIcons/big_turtle4.png" /></li>
+			    </ul>
 
-<body class="background">
-	<div>
-	  <!-- <div class="imgcontainer">
-	    <img src="/client/img/coin.jpg" alt="Avatar" class="avatar">
-	  </div> -->
-	<div class="bigCenterLabel">
-	  <label><b>Choose an icon</b></label>
-	</div>
-	  <div id="slideshow">
+			    <span class="arrow previous"></span>
+			    <span class="arrow next"></span>
+			</div>
 
-	    <ul class="slides">
-	        <li><img id="big_cat.png" src="/client/img/playerIcons/big_cat.png" width="170" height="170" /></li>
-	        <li><img id="big_frog.png" src="/client/img/playerIcons/big_frog.png" width="170" height="170" /></li>
-	        <li><img id="big_hippo.png" src="/client/img/playerIcons/big_hippo.png" width="170" height="170" /></li>
-	        <li><img id="big_lion.png" src="/client/img/playerIcons/big_lion.png" width="170" height="170" /></li>
-	        <li><img id="big_mouse.png" src="/client/img/playerIcons/big_mouse.png" width="170" height="170" /></li>
-	        <li><img id="big_panda.png" src="/client/img/playerIcons/big_panda.png" width="170" height="170" /></li>
-	        <li><img id="big_panther.png" src="/client/img/playerIcons/big_panther.png" width="170" height="170" /></li>
-	        <li><img id="big_rabbit.png" src="/client/img/playerIcons/big_rabbit.png" width="170" height="170" /></li>
-	        <li><img id="big_zebra.png" src="/client/img/playerIcons/big_zebra.png" width="170" height="170" /></li>
-	        <li><img id="big_turtle1.png" src="/client/img/playerIcons/big_turtle1.png" width="170" height="170" /></li>
-	        <li><img id="big_turtle2.png" src="/client/img/playerIcons/big_turtle2.png" width="170" height="170" /></li>
-	        <li><img id="big_turtle3.png" src="/client/img/playerIcons/big_turtle3.png" width="170" height="170" /></li>
-	        <li><img id="big_turtle4.png" src="/client/img/playerIcons/big_turtle4.png" width="170" height="170" /></li>
-	    </ul>
+			<div class="formContainer" style="width: 500px">
+			    <input type="text" placeholder="Enter Username" id="username" required>
+			    
+				<!-- <button type="input" onclick="openBomberman()">Simdilik Oyuna Geçme Butonu - Kaldırılacak</button> -->
 
-	    <span class="arrow previous"></span>
-	    <span class="arrow next"></span>
-	</div>
-
-	<div class="formContainer" style="width: 500px">
-	    <input type="text" placeholder="Enter Username" id="username" required>
-	    
-		<!-- <button type="input" onclick="openBomberman()">Simdilik Oyuna Geçme Butonu - Kaldırılacak</button> -->
-
-	    <button type="input" onclick="enterToCreateJoinListRoom()">JOIN</button>
-	    
-	  </div>
-	</div>
-</body>
-
+			    <button type="input" onclick="enterToCreateJoinListRoom()">JOIN</button>
+			</div>
+		</div>
+	</body>
 </html>
-
-
- 

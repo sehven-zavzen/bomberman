@@ -1,5 +1,3 @@
-/*var mainAnim = $.getScript("/../animate/mainAnimation.js", function() {
-});*/
 
 function restartScene() {
 	socket.emit('restartScene');

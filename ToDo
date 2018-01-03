@@ -111,7 +111,7 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 30.12.2017
 ----------
 * Game room someone joined user list - done
-* Chat for game room
+* Chat for game room - done
 ** Create simple chat implementation - done
 ** Needs to change joined players room to game name - done
 * Design user list in game room
@@ -125,23 +125,32 @@ Bomb objesine süre - hangi playera ait oldugu (patladıgında hangi playera bom
 02.01.2018
 ----------
 * Game headerına bastığında birsey yapmamalı - done
--- socket.on ifadesini document.ready içinde yazmak çözüyor - örnek gameRoomController.js -> ready ile ilgili kısım - done
-* OLMADI: YENI YARATILAN GAME sadece "general_room" odasındakilere gönderilsin :OLMADI chatte oldu gibi ama burda kesin olmadı - üstteki gibi yap - done
+* YENI YARATILAN GAME sadece "general_room" odasındakilere gönderilsin (socket.on ifadesini document.ready içinde yaz) - done
 * JOIN için Enter butonu - done
 * İsim alanını boş bırakır veya o alana 3 karakterden az girer ve join olmaya kalkarsa uyarı ver. - done
 * Ampul - ready not ready - send signal to everyone in that room - done
 ** Biri odaya girdiğinde herkesin readysini ayarla
 * Add password column to game list - done
-* Refactor index.html
-* Password to Create Game popup 
-* joinCreateListRoom.html default user icon
 
+03.01.2018
+----------
+* Refactor index.html - done
+* joinCreateListRoom.html default user icon - done
+*   <- Press if you are ready! uyarısı  sol sağ hareket edeninden - done
+** Ampul yanıyorsa kaybolacak, yoksa tekrar çıkacak - hos olmadı ama done
+* Exit button -> redirect to joinCreateListRoom.html
+* Start button for creator, also !start command for everyone
+* Start to private chat 
 
 
 
 
 Sonra yapılacaklar
+* Add Password Field To Create Game popup
 * Password implementation
+* İlerde refactor -> var element = $('#' + elementId);  Böyyk
+* Bir yerde game objesi tekrar yaratıldığında creatorId game parametrelerinde olmuyor, birara bak
+* Upgrade sprite animation to this -> http://blaiprat.github.io/jquery.animateSprite/
 * set readies and game props for newly joined players
 * Leave from chat - joinCreateListRoom.html page if user leaves the page - jquery unload event
 * Unique oda isimleri - varsa aynı isimli bir game ve listede yoksa game list refreshlenebilir   
@@ -159,7 +168,6 @@ Sonra yapılacaklar
 * Refactor animation files
 * Bir süre sonra bomba gücü otomatikte artabilir, herkes için
 * Oyun alanı bir süre sonra daralacak - Eren
-* Icon kısmı yuvarlak olsun - https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_login_form
 * Oyun başladığında bu sensin oku çıkabilir
 * Eğer socket.name yoksa bomberman.html ye geçmeyebilir, tekrar index.html ye yönlendirebilir
 * Bombayı bıraktığında playerın görüntüsü bir garip oluyor - player üstüne çizilen bomba animasyonu 
@@ -181,7 +189,7 @@ Sonra yapılacaklar
 ** Create chat room
 ** List and join created rooms
 * Use chosen icon in next html, use icon while chatting, playerIcon + name in chat room list
-
+* Exception Handler for socket io
 
 Belki yapılacaklar
 * Chat User Icon - stars for player lvl

@@ -9,6 +9,7 @@
 	<script src="./client/js/model/gameObject.js"></script>
 	<script src="./client/js/controller/gameRoomController.js"></script>
 	<script src="./client/js/controller/chatController.js"></script>
+	<script src="./client/js/animate/jqueryAnimation.js"></script>
 
 </head>
 <body class="Background">
@@ -24,9 +25,12 @@
 				
 			</div>
 		</div>
-
+<!-- &#8592 -->
 		<div class="MiddleContainer">
 			<img id="readyButton" src="/client/img/notReadyLamp.png" class="ReadyButton" onclick="setReady()" />
+			<label id="lampLabel" class="PressReadyLabel"> &#8592  Press to lamp if you are ready!</label>
+			<!-- </div> -->
+			
 		</div>
 
 		<div class="BottomContainer">

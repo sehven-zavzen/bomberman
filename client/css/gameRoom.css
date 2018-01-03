@@ -147,3 +147,12 @@
 	resize: none;
 	word-wrap: break-word;
 }
+
+.PressReadyLabel {
+	float: right;
+	margin-top: 30px;
+	margin-right: 370px;
+	font-size: 130%;
+	font-weight: bold;
+	position: absolute; /*Need to move left and right*/
+}
